@@ -25,12 +25,12 @@ export const SERVICES_EXTENDED: Record<string, ServiceExtended> = {
   weddings: {
     id: "weddings",
     title: "Bodas & Nupcias",
-    subtitle: "Donde cada promesa se convierte en eternidad",
-    longDescription: `Desde el primer nervio en la suite nupcial hasta el último baile bajo las luces. Cada boda en VERSO es una película que se vive una sola vez.
+    subtitle: "Suite, ceremonia, cocktail, baile. Todo en un solo espacio",
+    longDescription: `VERSO coordina timings sin interrumpir. Mientras vives tu ceremonia, nuestro equipo ajusta iluminación, temperatura y sonido según el momento. No preguntamos, anticipamos.
 
-VERSO entiende que tu día es la culminación de una historia. Por eso cada detalle, desde la iluminación que acaricia los techos hasta el servicio invisible que envuelve a tus invitados, está diseñado para que te olvides del logística y solo sientas la magia.
+Suite nupcial con espejo profesional y lighting. Pista de 120m² para 300 personas sin aglomeración. Cada espacio fluye al siguiente de manera natural.
 
-Nuestro equipo de concierge coordina cada momento sin que notes que estamos. Mientras tú vives, nosotros cuidamos.`,
+El catering incluye degustación previa con el chef. Nuestro equipo responde en menos de 5 minutos a cualquier imprevisto. Eso es coordinación invisible.`,
     heroImage: "/images/gallery/gallery-1.jpg",
     specs: [
       { label: "Capacidad", value: "50-300 invitados" },
@@ -78,12 +78,12 @@ Nuestro equipo de concierge coordina cada momento sin que notes que estamos. Mie
   gala: {
     id: "gala",
     title: "Social & Gala",
-    subtitle: "Noches donde cada detalle respira lujo",
-    longDescription: `Noches que vibran. El sonido te envuelve sin que veas de dónde viene. Lounge que invitan a quedarse. Pistas que piden un baile más.
+    subtitle: "Sonido profesional, 3 lounges, pista de 120m²",
+    longDescription: `En VERSO, una gala funciona porque el espacio está pensado para flujo: tres lounges diferenciados por iluminación, pista central de 120m², bar con visibilidad desde todos los ángulos. El diseño no compite con tu evento, lo sostiene.
 
-En VERSO, sabemos que una gala no es solo un evento: es una experiencia sensorial donde el diseño desaparece y queda solo la atmósfera. Techos que amplían el espacio, luz que seduce, acústica que envuelve sin abrumar.
+Sonido distribuido en 8 puntos (no un altavoz central). Acústica sin rebotes que permiten conversación. Temperatura controlada por zonas. Barra con bartender especializado y 40+ opciones de spirits.
 
-Tu evento social merece un escenario donde los detalles trascienden. Donde los invitados se mueven como en una película. Donde la conversación fluye porque el ambiente lo permite.`,
+Nuestro equipo ajusta iluminación según el momento del evento. 12 horas de operación sin que baje la calidad del servicio.`,
     heroImage: "/images/gallery/gallery-2.jpg",
     specs: [
       { label: "Capacidad", value: "100-350 personas" },
@@ -131,12 +131,12 @@ Tu evento social merece un escenario donde los detalles trascienden. Donde los i
   corporate: {
     id: "corporate",
     title: "Corporate",
-    subtitle: "Tu mensaje merece un escenario perfecto",
-    longDescription: `Tu mensaje merece un escenario a su altura. Tecnología invisible pero impecable. Catering que impresiona sin distraer de tu presentación.
+    subtitle: "Acústica optimizada, A/V 4K, conectividad 1Gbps",
+    longDescription: `En VERSO, un evento corporativo es una herramienta de comunicación. La acústica optimizada (inteligibilidad mayor a 95%) garantiza que 400 personas escuchen sin esfuerzo. Sin rebotes, sin zonas muertas.
 
-En VERSO entendemos que un evento corporativo es una oportunidad de liderazgo. La acústica perfecta asegura que cada palabra resuena. Los techos altos dan sensación de amplitud y confianza. La iluminación arquitectónica posiciona tu marca sin ser obvia.
+Sistemas A/V broadcast 4K. Técnico dedicado durante todo el evento. Pantalla de 8m nítida. Fibra 1Gbps + backup 4G automático. Prueba de todo 24h antes.
 
-No se trata de complejidad, sino de precisión. Cada elemento orquestado para que tu mensaje sea el protagonista.`,
+Catering de calidad ejecutiva, sin distraer presentaciones. Breakout rooms disponibles para sesiones paralelas. Control de iluminación por escena (6 configuraciones predefinidas).`,
     heroImage: "/images/gallery/gallery-4.jpg",
     specs: [
       { label: "Capacidad", value: "80-400 personas" },

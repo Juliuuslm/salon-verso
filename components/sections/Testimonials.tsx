@@ -15,42 +15,42 @@ const TESTIMONIALS: Testimonial[] = [
   {
     id: "1",
     quote:
-      "La sofisticación de VERSO no tiene comparación. Cada detalle, desde la iluminación hasta el servicio, fue ejecutado con precisión.",
+      "Tuvimos 280 invitados en la pista y nadie se quejó del espacio. La altura de los techos marca la diferencia. Y la iluminación se ajustó en cada momento: ceremonia, cocktail, baile. Nada interrumpió el flujo.",
     author: "Isabella & Jorge",
     event: "Boda de Invierno, 2023",
   },
   {
     id: "2",
     quote:
-      "Un espacio que trasciende lo ordinario. La arquitectura, el diseño y la atención al detalle hacen de VERSO el lugar perfecto para celebrar.",
+      "Para una gala corporativa con 350 personas, lo importante es que suene claro. Podías estar en cualquier rincón y escuchabas sin esfuerzo. El bar nunca se vio saturado, los tres espacios fluyeron naturalmente.",
     author: "Magdalena Cortés",
     event: "Gala Corporativa, 2024",
   },
   {
     id: "3",
     quote:
-      "Nuestro evento fue una experiencia inolvidable. El equipo de VERSO entendió perfectamente nuestra visión y la llevó a la realidad.",
+      "No nos pidieron que coordináramos nada dos veces. El equipo anticipaba. La suite estaba lista, la iluminación cambió cuando nosotros queremos, el timing entre platos fue perfecto. Eso es lo que valoras después.",
     author: "Carlos & Sofía",
     event: "Boda Primavera, 2024",
   },
   {
     id: "4",
     quote:
-      "La acústica impecable y los espacios versátiles de VERSO son incomparables. Perfectamente diseñado para eventos de clase mundial.",
+      "Presentamos a 400 personas. Cada diapositiva se vio nítida, cada palabra se escuchó sin rebotes acústicos. Tenían un técnico manejando todo en tiempo real. Eso da tranquilidad cuando el contenido es crítico.",
     author: "David Morales",
     event: "Conferencia Ejecutiva, 2023",
   },
   {
     id: "5",
     quote:
-      "Cada rincón de VERSO respira elegancia y exclusividad. Un lugar donde los detalles trascienden y crean momentos mágicos.",
+      "Lo que nos sorprendió fue el bar. 40+ opciones, y el bartender no solo mezclaba, recomendaba. La pista de baile aguantó a 250 personas sin cansancio. Y a los 4am, todo seguía limpio. Eso cuenta.",
     author: "Valentina & Alejandro",
     event: "Boda Otoño, 2023",
   },
   {
     id: "6",
     quote:
-      "La iluminación inteligente, los espacios amplios y el servicio impecable hacen de VERSO un escenario inigualable para cualquier celebración.",
+      "Pasamos 12 horas en VERSO. Desde setup hasta después de medianoche. El equipo ajustó temperatura, sonido, iluminación sin que tuviéramos que pedir. Eso es coordinación invisible. Es lo que buscábamos.",
     author: "Patricia Ruiz",
     event: "Evento Privado, 2024",
   },

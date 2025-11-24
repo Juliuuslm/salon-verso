@@ -12,21 +12,21 @@ const SERVICES: Service[] = [
     icon: Star,
     title: "Bodas & Nupcias",
     description:
-      "Desde el primer nervio en la suite nupcial hasta el último baile bajo las luces. Cada boda en VERSO es una película que se vive una sola vez.",
+      "Suite nupcial con espejo profesional. Pista de 120m² para 300 personas. Coordinación que anticipa cada momento sin que tengas que pedir.",
   },
   {
     id: "gala",
     icon: Music,
     title: "Social & Gala",
     description:
-      "Noches que vibran. El sonido te envuelve sin que veas de dónde viene. Lounge que invitan a quedarse. Pistas que piden un baile más.",
+      "Sonido distribuido 360°. Tres lounges diferenciados por iluminación. Pista de baile con circulación fluida para 350 personas.",
   },
   {
     id: "corporate",
     icon: Users,
     title: "Corporate",
     description:
-      "Tu mensaje merece un escenario a su altura. Tecnología invisible pero impecable. Catering que impresiona sin distraer de tu presentación.",
+      "Audio 4K broadcast, pantalla de 8m, acústica optimizada para 400 personas. Técnico dedicado durante todo el evento.",
   },
 ];
 
@@ -79,23 +79,23 @@ export default function Services() {
                     <ul className="text-xs text-neutral-500 space-y-2 mb-8">
                       {service.title === "Bodas & Nupcias" && (
                         <>
-                          <li>✓ Coordinación de inicio a fin (sin que notes que estamos)</li>
-                          <li>✓ Ambientación única para tu historia</li>
-                          <li>✓ Catering que se convierte en conversación</li>
+                          <li>✓ Suite nupcial con espejo profesional</li>
+                          <li>✓ Coordinación de timings (nunca esperas)</li>
+                          <li>✓ Chef in-house, menú degustación previa</li>
                         </>
                       )}
                       {service.title === "Social & Gala" && (
                         <>
-                          <li>✓ Sonido que abraza sin ser visto</li>
-                          <li>✓ Espacios que fluyen con tu ritmo</li>
-                          <li>✓ Detalles que generan conversación</li>
+                          <li>✓ Audio en 8 puntos (calidad homogénea)</li>
+                          <li>✓ Tres áreas configurables: bar, lounge, pista</li>
+                          <li>✓ Barra premium con 40+ spirits</li>
                         </>
                       )}
                       {service.title === "Corporate" && (
                         <>
-                          <li>✓ Tecnología que desaparece en el fondo</li>
-                          <li>✓ Tu mensaje, brillante y claro</li>
-                          <li>✓ Experiencia que impresiona</li>
+                          <li>✓ Sistema A/V 4K con técnico dedicado</li>
+                          <li>✓ Acústica optimizada (mayor a 95% inteligibilidad)</li>
+                          <li>✓ Fibra 1Gbps + backup 4G automático</li>
                         </>
                       )}
                     </ul>
