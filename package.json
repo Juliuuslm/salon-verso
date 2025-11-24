@@ -1,0 +1,33 @@
+{
+  "name": "verso-venue",
+  "version": "1.0.0",
+  "description": "VERSO - Luxury Event Venue",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^15.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "gsap": "^3.12.2",
+    "lenis": "^1.0.42",
+    "lucide-react": "^0.408.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@types/node": "^20.16.10",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "tailwindcss": "^3.4.14",
+    "postcss": "^8.4.41",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^15.0.0"
+  },
+  "packageManager": "pnpm@9.11.0"
+}
