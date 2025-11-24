@@ -1,13 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, CheckCircle, AlertCircle, Loader } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
+import { useFormValidation } from "@/lib/hooks/useFormValidation";
 import type { FormData } from "@/types";
 
 /**
  * CONTACT SECTION
- * Formulario de contacto y información de ubicación
+ * Formulario de contacto con validación en tiempo real
+ * y mejor feedback visual
  */
 export default function Contact() {
   const [formData, setFormData] = useState<FormData>({
@@ -22,6 +24,9 @@ export default function Contact() {
     "idle" | "success" | "error"
   >("idle");
 
+  const { errors, touched, validateForm, handleBlur, clearErrors } =
+    useFormValidation();
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -33,18 +38,26 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Validar todo el formulario
+    const formErrors = validateForm(formData);
+    if (Object.keys(formErrors).length > 0) {
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
       // Aquí iría la llamada a una API
       // Por ahora, solo simulamos el envío
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
       setSubmitStatus("success");
       setFormData({ name: "", phone: "", interest: "boda", message: "" });
+      clearErrors();
 
-      // Reset success message después de 3 segundos
-      setTimeout(() => setSubmitStatus("idle"), 3000);
+      // Reset success message después de 4 segundos
+      setTimeout(() => setSubmitStatus("idle"), 4000);
     } catch {
       setSubmitStatus("error");
       setTimeout(() => setSubmitStatus("idle"), 3000);
@@ -94,95 +107,221 @@ export default function Contact() {
                 onSubmit={handleSubmit}
                 className="bg-[#0a0a0a] p-6 md:p-12 space-y-6 md:space-y-8"
               >
-                {/* Name & Phone */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                  <div className="group">
-                    <label className="text-[10px] md:text-xs uppercase text-neutral-500 block mb-2 group-focus-within:text-amber-500 transition-colors">
-                      Nombre
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full bg-transparent border-b border-white/20 py-3 md:py-4 text-white focus:outline-none focus:border-amber-500 transition-all font-serif text-base md:text-lg"
-                      placeholder="Tu nombre completo"
-                    />
+                {/* Personal Info Section */}
+                <fieldset className="space-y-6 border-b border-white/10 pb-6">
+                  <legend className="text-[10px] uppercase tracking-widest text-amber-500/70 block mb-4">
+                    Información Personal
+                  </legend>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                    {/* Name Input */}
+                    <div className="group">
+                      <label
+                        htmlFor="name"
+                        className={`text-[10px] md:text-xs uppercase tracking-wider block mb-2 transition-colors ${
+                          errors.name && touched.name
+                            ? "text-red-400"
+                            : "text-neutral-400 group-focus-within:text-amber-500"
+                        }`}
+                      >
+                        Nombre {errors.name && touched.name && "*"}
+                      </label>
+                      <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        className={`w-full bg-transparent border-b py-3 md:py-4 text-white focus:outline-none transition-all font-serif text-base md:text-lg ${
+                          errors.name && touched.name
+                            ? "border-red-500/70 focus:border-red-500"
+                            : "border-white/20 focus:border-amber-500"
+                        }`}
+                        placeholder="Tu nombre completo"
+                        aria-invalid={!!(errors.name && touched.name)}
+                        aria-describedby={
+                          errors.name && touched.name ? "name-error" : undefined
+                        }
+                      />
+                      {errors.name && touched.name && (
+                        <p
+                          id="name-error"
+                          className="text-red-400 text-xs mt-2 flex items-center gap-1"
+                        >
+                          <AlertCircle size={14} />
+                          {errors.name}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Phone Input */}
+                    <div className="group">
+                      <label
+                        htmlFor="phone"
+                        className={`text-[10px] md:text-xs uppercase tracking-wider block mb-2 transition-colors ${
+                          errors.phone && touched.phone
+                            ? "text-red-400"
+                            : "text-neutral-400 group-focus-within:text-amber-500"
+                        }`}
+                      >
+                        Teléfono {errors.phone && touched.phone && "*"}
+                      </label>
+                      <input
+                        id="phone"
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        className={`w-full bg-transparent border-b py-3 md:py-4 text-white focus:outline-none transition-all font-serif text-base md:text-lg ${
+                          errors.phone && touched.phone
+                            ? "border-red-500/70 focus:border-red-500"
+                            : "border-white/20 focus:border-amber-500"
+                        }`}
+                        placeholder="+52 (55) 8899 0000"
+                        aria-invalid={!!(errors.phone && touched.phone)}
+                        aria-describedby={
+                          errors.phone && touched.phone ? "phone-error" : undefined
+                        }
+                      />
+                      {errors.phone && touched.phone && (
+                        <p
+                          id="phone-error"
+                          className="text-red-400 text-xs mt-2 flex items-center gap-1"
+                        >
+                          <AlertCircle size={14} />
+                          {errors.phone}
+                        </p>
+                      )}
+                    </div>
                   </div>
+                </fieldset>
+
+                {/* Event Details Section */}
+                <fieldset className="space-y-6 border-b border-white/10 pb-6">
+                  <legend className="text-[10px] uppercase tracking-widest text-amber-500/70 block mb-4">
+                    Detalles del Evento
+                  </legend>
+
+                  {/* Interest Select */}
                   <div className="group">
-                    <label className="text-[10px] md:text-xs uppercase text-neutral-500 block mb-2 group-focus-within:text-amber-500 transition-colors">
-                      Teléfono
+                    <label
+                      htmlFor="interest"
+                      className={`text-[10px] md:text-xs uppercase tracking-wider block mb-2 transition-colors ${
+                        errors.interest && touched.interest
+                          ? "text-red-400"
+                          : "text-neutral-400 group-focus-within:text-amber-500"
+                      }`}
+                    >
+                      Tipo de Evento {errors.interest && touched.interest && "*"}
                     </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
+                    <select
+                      id="interest"
+                      name="interest"
+                      value={formData.interest}
                       onChange={handleChange}
-                      required
-                      className="w-full bg-transparent border-b border-white/20 py-3 md:py-4 text-white focus:outline-none focus:border-amber-500 transition-all font-serif text-base md:text-lg"
-                      placeholder="Número de contacto"
-                    />
+                      onBlur={handleBlur}
+                      className={`w-full bg-transparent border-b py-3 md:py-4 text-white focus:outline-none transition-all font-serif text-base md:text-lg appearance-none cursor-pointer rounded-none ${
+                        errors.interest && touched.interest
+                          ? "border-red-500/70 focus:border-red-500"
+                          : "border-white/20 focus:border-amber-500"
+                      }`}
+                      aria-invalid={!!(errors.interest && touched.interest)}
+                    >
+                      <option value="boda" className="bg-[#1a1a1a]">
+                        Boda
+                      </option>
+                      <option value="corporativo" className="bg-[#1a1a1a]">
+                        Corporativo
+                      </option>
+                      <option value="social" className="bg-[#1a1a1a]">
+                        Social
+                      </option>
+                    </select>
                   </div>
-                </div>
 
-                {/* Interest Select */}
-                <div className="group">
-                  <label className="text-[10px] md:text-xs uppercase text-neutral-500 block mb-2 group-focus-within:text-amber-500 transition-colors">
-                    Interés
-                  </label>
-                  <select
-                    name="interest"
-                    value={formData.interest}
-                    onChange={handleChange}
-                    className="w-full bg-transparent border-b border-white/20 py-3 md:py-4 text-white focus:outline-none focus:border-amber-500 transition-all font-serif text-base md:text-lg appearance-none cursor-pointer rounded-none"
-                  >
-                    <option value="boda" className="bg-[#1a1a1a]">
-                      Boda
-                    </option>
-                    <option value="corporativo" className="bg-[#1a1a1a]">
-                      Corporativo
-                    </option>
-                    <option value="social" className="bg-[#1a1a1a]">
-                      Social
-                    </option>
-                  </select>
-                </div>
+                  {/* Message */}
+                  <div className="group">
+                    <label
+                      htmlFor="message"
+                      className={`text-[10px] md:text-xs uppercase tracking-wider block mb-2 transition-colors ${
+                        errors.message && touched.message
+                          ? "text-red-400"
+                          : "text-neutral-400 group-focus-within:text-amber-500"
+                      }`}
+                    >
+                      Cuéntanos sobre tu evento{" "}
+                      {errors.message && touched.message && "*"}
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      rows={4}
+                      className={`w-full bg-transparent border-b py-3 md:py-4 text-white focus:outline-none transition-all font-serif text-base md:text-lg resize-none ${
+                        errors.message && touched.message
+                          ? "border-red-500/70 focus:border-red-500"
+                          : "border-white/20 focus:border-amber-500"
+                      }`}
+                      placeholder="Cuéntanos brevemente sobre tu evento, cantidad de invitados, fecha tentativa..."
+                      aria-invalid={!!(errors.message && touched.message)}
+                      aria-describedby={
+                        errors.message && touched.message ? "message-error" : undefined
+                      }
+                    ></textarea>
+                    {errors.message && touched.message && (
+                      <p
+                        id="message-error"
+                        className="text-red-400 text-xs mt-2 flex items-center gap-1"
+                      >
+                        <AlertCircle size={14} />
+                        {errors.message}
+                      </p>
+                    )}
+                  </div>
+                </fieldset>
 
-                {/* Message */}
-                <div className="group">
-                  <label className="text-[10px] md:text-xs uppercase text-neutral-500 block mb-2 group-focus-within:text-amber-500 transition-colors">
-                    Mensaje
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={3}
-                    className="w-full bg-transparent border-b border-white/20 py-3 md:py-4 text-white focus:outline-none focus:border-amber-500 transition-all font-serif text-base md:text-lg resize-none"
-                    placeholder="Cuéntanos brevemente sobre tu evento..."
-                  ></textarea>
-                </div>
-
-                {/* Status Messages */}
+                {/* Status Messages with Better Feedback */}
                 {submitStatus === "success" && (
-                  <div className="bg-green-500/10 border border-green-500/30 text-green-400 px-4 py-2 rounded text-sm">
-                    ✓ Mensaje enviado correctamente. Nos contactaremos pronto.
+                  <div className="bg-green-500/10 border border-green-500/40 text-green-300 px-4 py-3 rounded flex items-start gap-3 animate-in fade-in">
+                    <CheckCircle size={20} className="flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-sm">¡Mensaje enviado!</p>
+                      <p className="text-xs text-green-200 mt-1">
+                        Responderemos en máximo 24 horas. Gracias por tu interés.
+                      </p>
+                    </div>
                   </div>
                 )}
                 {submitStatus === "error" && (
-                  <div className="bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-2 rounded text-sm">
-                    Error al enviar. Por favor intenta nuevamente.
+                  <div className="bg-red-500/10 border border-red-500/40 text-red-300 px-4 py-3 rounded flex items-start gap-3">
+                    <AlertCircle size={20} className="flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-sm">Error al enviar</p>
+                      <p className="text-xs text-red-200 mt-1">
+                        Por favor intenta nuevamente o contáctanos directamente.
+                      </p>
+                    </div>
                   </div>
                 )}
 
-                {/* Submit Button */}
+                {/* Submit Button with Loading State */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-white text-black py-4 md:py-5 uppercase tracking-[0.2em] hover:bg-amber-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-500 text-xs font-bold mt-4 md:mt-8"
+                  className="w-full relative bg-white text-black py-4 md:py-5 uppercase tracking-[0.15em] hover:bg-amber-100 disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-300 text-xs font-bold mt-6 md:mt-8 overflow-hidden"
                 >
-                  {isSubmitting ? "Enviando..." : "Enviar Solicitud"}
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Loader size={16} className="animate-spin" />
+                      Enviando solicitud...
+                    </span>
+                  ) : (
+                    "Solicitar Cotización"
+                  )}
                 </button>
               </form>
             </Reveal>
