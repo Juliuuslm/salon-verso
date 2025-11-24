@@ -218,21 +218,39 @@ components/sections/
 
 ---
 
-## 🎯 Próximas Fases
+## 🚀 FASE 2 - Refinamientos (En Progreso)
 
-### **FASE 2 - Refinamientos**
+### **FASE 2.1: Scroll Progress Indicator** ✅
+- ✅ Componente ScrollProgress con gradient amber
+- ✅ ARIA progressbar para accesibilidad
+- ✅ Smooth transitions, no reflow
+- ✅ Visual feedback del scroll en todo momento
+
+### **FASE 2.2: Gallery Improvements** ✅
+- ✅ Play/Pause button para control de autoplay
+- ✅ Thumbnail navigation con preview
+- ✅ Active thumbnail con border amber + ring
+- ✅ Responsive: 16x16 mobile, 20x20 desktop
+- ✅ Click en thumbnail pausa autoplay
+
+### **FASE 2.3: Services Cards Enhancement** ✅
+- ✅ Features list (checkmarks) por servicio
+- ✅ Better content structure: title + description + features + CTA
+- ✅ Improved micro-copy ("Conocer más")
+- ✅ Better contrast in text
+
+### **Próximas en FASE 2**
 - [ ] Aplicar design tokens a todos los componentes
-- [ ] Agregar semantic colors (success/error) al resto de la UI
-- [ ] Scroll progress indicator en navbar
-- [ ] Gallery pause/play button
-- [ ] Más información en Services cards
+- [ ] Responsive typography con clamp()
+- [ ] About section improvements
+- [ ] Testimonials enhancement
 
 ### **FASE 3 - Polish**
 - [ ] Blur placeholders para imágenes (Next.js feature)
-- [ ] Responsive typography con clamp()
 - [ ] Border-radius consistency
 - [ ] Icon sizing system
 - [ ] Motion refinements
+- [ ] Final contrast audit
 
 ---
 
