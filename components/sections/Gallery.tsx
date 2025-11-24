@@ -9,23 +9,23 @@ import type { GalleryImage } from "@/types";
 const GALLERY_IMAGES: GalleryImage[] = [
   {
     url: "/images/gallery/gallery-1.jpg",
-    title: "Ceremonia Bajo 5.5m de Altura",
+    title: "Promesas Bajo Nuestros Techos",
   },
   {
     url: "/images/gallery/gallery-2.jpg",
-    title: "Iluminación LED Programable",
+    title: "Noches que Brillan",
   },
   {
     url: "/images/gallery/gallery-3.jpg",
-    title: "Ambientación Personalizada",
+    title: "Flores que Cuentan Historias",
   },
   {
     url: "/images/gallery/gallery-4.jpg",
-    title: "Pista 120m² para 300 Personas",
+    title: "Cuando 300 se Sienten Íntimos",
   },
   {
     url: "/images/gallery/gallery-5.jpg",
-    title: "Suite Nupcial con Espejo Pro",
+    title: "En los Detalles Vive la Magia",
   },
 ];
 

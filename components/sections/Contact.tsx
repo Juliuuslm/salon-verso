@@ -74,10 +74,10 @@ export default function Contact() {
           <div className="lg:w-1/3">
             <Reveal>
               <h2 className="text-h2-fluid font-serif text-white mb-6 md:mb-8">
-                Agenda Tu Recorrido
+                Comienza Tu Historia
               </h2>
               <p className="text-neutral-400 font-light leading-relaxed mb-8 md:mb-12 text-sm md:text-base">
-                La altura, la acústica, la iluminación. Son cosas que se sienten, no se explican en fotos. Camina el espacio con nosotros 60 minutos.
+                VERSO se vive, no se describe. Agenda tu recorrido privado y descubre por qué quienes nos conocen, nos eligen.
               </p>
               <div className="space-y-6 text-xs md:text-sm uppercase tracking-widest text-neutral-300">
                 <div className="flex items-center gap-4 hover:text-amber-400 transition-colors cursor-pointer w-max">

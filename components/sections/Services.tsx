@@ -12,21 +12,21 @@ const SERVICES: Service[] = [
     icon: Star,
     title: "Bodas & Nupcias",
     description:
-      "Suite nupcial con espejo profesional. Pista de 120m² para 300 personas. Coordinación que anticipa cada momento sin que tengas que pedir.",
+      "Desde que te arreglas en la suite con luz natural hasta el último baile de la noche. En VERSO cada momento fluye sin que te preocupes por nada técnico.",
   },
   {
     id: "gala",
     icon: Music,
     title: "Social & Gala",
     description:
-      "Sonido distribuido 360°. Tres lounges diferenciados por iluminación. Pista de baile con circulación fluida para 350 personas.",
+      "Noches con energía real. Sistema de sonido 360° en techos de 5.5m sin bocinas visibles. Tres espacios diferentes para que tus invitados circulen toda la noche.",
   },
   {
     id: "corporate",
     icon: Users,
     title: "Corporate",
     description:
-      "Audio 4K broadcast, pantalla de 8m, acústica optimizada para 400 personas. Técnico dedicado durante todo el evento.",
+      "Tu mensaje merece un escenario profesional. Audio 4K con acústica de sala de conciertos, pantallas integradas sin cables visibles. Catering ejecutivo servido en tiempos exactos.",
   },
 ];
 
@@ -49,7 +49,7 @@ export default function Services() {
           </Reveal>
           <Reveal delay={200} className="w-full md:w-auto">
             <p className="text-neutral-500 text-xs md:text-sm uppercase tracking-widest mt-4 md:mt-0">
-              Experiencias Bespoke
+              Diseñadas para Ti
             </p>
           </Reveal>
         </div>
@@ -79,23 +79,23 @@ export default function Services() {
                     <ul className="text-xs text-neutral-500 space-y-2 mb-8">
                       {service.title === "Bodas & Nupcias" && (
                         <>
-                          <li>✓ Suite nupcial con espejo profesional</li>
-                          <li>✓ Coordinación de timings (nunca esperas)</li>
-                          <li>✓ Chef in-house, menú degustación previa</li>
+                          <li>✓ Coordinación completa (horarios, vendors, timings)</li>
+                          <li>✓ Diseño de iluminación personalizado según tu paleta</li>
+                          <li>✓ Catering gourmet con chef (mexicano o internacional)</li>
                         </>
                       )}
                       {service.title === "Social & Gala" && (
                         <>
-                          <li>✓ Audio en 8 puntos (calidad homogénea)</li>
-                          <li>✓ Tres áreas configurables: bar, lounge, pista</li>
-                          <li>✓ Barra premium con 40+ spirits</li>
+                          <li>✓ Audio profesional 360° integrado en arquitectura</li>
+                          <li>✓ 3 ambientes conectados: lounge, pista 120m², barra</li>
+                          <li>✓ Elementos decorativos customizables</li>
                         </>
                       )}
                       {service.title === "Corporate" && (
                         <>
-                          <li>✓ Sistema A/V 4K con técnico dedicado</li>
-                          <li>✓ Acústica optimizada (mayor a 95% inteligibilidad)</li>
-                          <li>✓ Fibra 1Gbps + backup 4G automático</li>
+                          <li>✓ Sistema AV 4K, pantallas integradas, WiFi 6 de 1Gbps</li>
+                          <li>✓ Acústica optimizada + pantallas sin puntos ciegos</li>
+                          <li>✓ Catering ejecutivo + concierge dedicado</li>
                         </>
                       )}
                     </ul>

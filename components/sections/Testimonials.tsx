@@ -15,44 +15,44 @@ const TESTIMONIALS: Testimonial[] = [
   {
     id: "1",
     quote:
-      "Tuvimos 280 invitados en la pista y nadie se quejó del espacio. La altura de los techos marca la diferencia. Y la iluminación se ajustó en cada momento: ceremonia, cocktail, baile. Nada interrumpió el flujo.",
-    author: "Isabella & Jorge",
-    event: "Boda de Invierno, 2023",
+      "Lo que más nos gustó fue la suite nupcial con ventanas enormes. Nos arreglamos con luz natural y el equipo nos avisó 10 minutos antes de cada momento importante. Cero estrés.",
+    author: "Isabella & Jorge R.",
+    event: "Diciembre 2023",
   },
   {
     id: "2",
     quote:
-      "Para una gala corporativa con 350 personas, lo importante es que suene claro. Podías estar en cualquier rincón y escuchabas sin esfuerzo. El bar nunca se vio saturado, los tres espacios fluyeron naturalmente.",
-    author: "Magdalena Cortés",
-    event: "Gala Corporativa, 2024",
+      "Necesitábamos un lugar que impresionara a 200 ejecutivos sin parecer ostentoso. Los techos altos y el sonido distribuido hicieron que las presentaciones se sintieran como TED Talks. Varios clientes nos preguntaron dónde fue.",
+    author: "Magdalena C.",
+    event: "Startup Summit 2024",
   },
   {
     id: "3",
     quote:
-      "No nos pidieron que coordináramos nada dos veces. El equipo anticipaba. La suite estaba lista, la iluminación cambió cuando nosotros queremos, el timing entre platos fue perfecto. Eso es lo que valoras después.",
-    author: "Carlos & Sofía",
-    event: "Boda Primavera, 2024",
+      "Queríamos boda íntima pero con pista para bailar. VERSO nos montó la cena en el lounge (60 personas) y después abrieron la pista principal. El DJ y la banda tocaron al mismo tiempo en diferentes espacios. Toda la noche sin parar.",
+    author: "Carlos y Sofía M.",
+    event: "Abril 2024",
   },
   {
     id: "4",
     quote:
-      "Presentamos a 400 personas. Cada diapositiva se vio nítida, cada palabra se escuchó sin rebotes acústicos. Tenían un técnico manejando todo en tiempo real. Eso da tranquilidad cuando el contenido es crítico.",
-    author: "David Morales",
-    event: "Conferencia Ejecutiva, 2023",
+      "Hicimos transmisión en vivo con 4 cámaras y el audio salió limpio sin rentar equipo extra. El WiFi de 1Gbps aguantó 300 dispositivos conectados simultáneamente. Nuestro equipo de IT quedó sorprendido.",
+    author: "David M.",
+    event: "Conferencia Tech 2023",
   },
   {
     id: "5",
     quote:
-      "Lo que nos sorprendió fue el bar. 40+ opciones, y el bartender no solo mezclaba, recomendaba. La pista de baile aguantó a 250 personas sin cansancio. Y a los 4am, todo seguía limpio. Eso cuenta.",
-    author: "Valentina & Alejandro",
-    event: "Boda Otoño, 2023",
+      "En octubre el clima estuvo impredecible. VERSO tiene clima por zonas, entonces tuvimos el cocktail en una temperatura y la pista más fresca. También coordinaron con nuestro fotógrafo sin que estuviéramos en medio.",
+    author: "Valentina & Alejandro L.",
+    event: "Octubre 2023",
   },
   {
     id: "6",
     quote:
-      "Pasamos 12 horas en VERSO. Desde setup hasta después de medianoche. El equipo ajustó temperatura, sonido, iluminación sin que tuviéramos que pedir. Eso es coordinación invisible. Es lo que buscábamos.",
-    author: "Patricia Ruiz",
-    event: "Evento Privado, 2024",
+      "Cumpleaños 50 de mi esposo. Queríamos elegante pero no formal. VERSO programó la iluminación en azul-dorado que combinaba con la decoración. El bartender creó un coctel signature con mezcal que fue todo un hit.",
+    author: "Patricia R.",
+    event: "Aniversario 2024",
   },
 ];
 
