@@ -1,4 +1,5 @@
 import GrainOverlay from "@/components/ui/GrainOverlay";
+import ScrollProgress from "@/components/ui/ScrollProgress";
 import Navbar from "@/components/sections/Navbar";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
@@ -14,6 +15,7 @@ export default function Home() {
     <ScrollProvider>
       <div className="min-h-screen bg-[#0a0a0a] text-neutral-200 font-sans selection:bg-amber-500/30 overflow-x-hidden antialiased relative">
         <GrainOverlay />
+        <ScrollProgress />
         <Navbar />
         <Hero />
         <About />
