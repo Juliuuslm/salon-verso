@@ -21,7 +21,7 @@ export default function About() {
             <Reveal direction="up" variant="blur">
               <h2 className="text-h2-fluid font-serif text-white mb-8 md:mb-12">
                 Diseño <br />
-                <span className="italic text-neutral-600">Interior</span>
+                <span className="italic text-neutral-600">Sensorial</span>
               </h2>
               <div className="h-[1px] w-24 bg-amber-800/50 mb-8 md:mb-12"></div>
               <p className="text-neutral-400 leading-loose mb-8 text-base md:text-lg font-light">

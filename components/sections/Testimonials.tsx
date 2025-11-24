@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 

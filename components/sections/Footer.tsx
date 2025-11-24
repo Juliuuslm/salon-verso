@@ -30,7 +30,7 @@ export default function Footer() {
         ))}
       </div>
       <p className="text-neutral-700 text-[10px] uppercase tracking-widest">
-        © {currentYear} Verso Venue. All rights reserved.
+        © {currentYear} Verso Venue. Todos los derechos reservados.
       </p>
     </footer>
   );
