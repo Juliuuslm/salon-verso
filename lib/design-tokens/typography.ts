@@ -62,37 +62,37 @@ export const typography = {
     widest3: "0.5em",
   },
 
-  // Text styles presets
+  // Text styles presets with fluid typography
   styles: {
-    // Headings
+    // Headings - using clamp() for fluid responsive sizing
     h1: {
-      fontSize: "3.75rem", // 60px / 96px desktop
+      fontSize: "clamp(2rem, 8vw, 6rem)", // 32px → 96px (scales smoothly)
       fontWeight: "700",
       lineHeight: "1.2",
       fontFamily: "serif",
       letterSpacing: "-0.02em",
     },
     h2: {
-      fontSize: "2.25rem", // 36px / 60px
+      fontSize: "clamp(1.5rem, 5vw, 3.75rem)", // 24px → 60px
       fontWeight: "700",
       lineHeight: "1.2",
       fontFamily: "serif",
       letterSpacing: "-0.01em",
     },
     h3: {
-      fontSize: "1.875rem", // 30px
+      fontSize: "clamp(1.25rem, 3.5vw, 2.25rem)", // 20px → 36px
       fontWeight: "600",
       lineHeight: "1.3",
       fontFamily: "serif",
     },
     h4: {
-      fontSize: "1.5rem", // 24px
+      fontSize: "clamp(1.125rem, 2.5vw, 1.875rem)", // 18px → 30px
       fontWeight: "600",
       lineHeight: "1.4",
       fontFamily: "serif",
     },
     h5: {
-      fontSize: "1.25rem", // 20px
+      fontSize: "clamp(1rem, 2vw, 1.5rem)", // 16px → 24px
       fontWeight: "600",
       lineHeight: "1.4",
     },

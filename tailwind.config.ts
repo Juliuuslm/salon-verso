@@ -47,6 +47,14 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      fontSize: {
+        // Fluid typography using clamp()
+        "h1-fluid": ["clamp(2rem, 8vw, 6rem)", { lineHeight: "1.2" }],
+        "h2-fluid": ["clamp(1.5rem, 5vw, 3.75rem)", { lineHeight: "1.2" }],
+        "h3-fluid": ["clamp(1.25rem, 3.5vw, 2.25rem)", { lineHeight: "1.3" }],
+        "h4-fluid": ["clamp(1.125rem, 2.5vw, 1.875rem)", { lineHeight: "1.4" }],
+        "h5-fluid": ["clamp(1rem, 2vw, 1.5rem)", { lineHeight: "1.4" }],
+      },
     },
   },
   plugins: [],

@@ -14,7 +14,7 @@ export default function Testimonials() {
       <div className="container mx-auto px-6">
         <Reveal direction="up" className="max-w-4xl mx-auto text-center">
           <Quote className="w-8 h-8 md:w-12 md:h-12 text-amber-700/30 mx-auto mb-8 md:mb-12" />
-          <h2 className="text-xl md:text-4xl font-serif text-neutral-300 leading-relaxed italic mb-8 md:mb-12">
+          <h2 className="text-h3-fluid font-serif text-neutral-300 italic mb-8 md:mb-12">
             &quot;La sofisticación de VERSO no tiene comparación. Cada detalle,
             desde la iluminación hasta el servicio, fue ejecutado con
             precisión.&quot;

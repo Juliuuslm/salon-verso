@@ -76,7 +76,7 @@ export default function Gallery() {
             <span className="text-amber-500 text-[10px] md:text-xs tracking-[0.3em] uppercase block mb-2 md:mb-4">
               Portafolio
             </span>
-            <h3 className="text-2xl md:text-4xl text-white font-serif">
+            <h3 className="text-h3-fluid text-white font-serif">
               Momentos
             </h3>
           </div>
@@ -182,7 +182,7 @@ export default function Gallery() {
                 <p className="text-amber-400 text-[10px] md:text-xs uppercase tracking-[0.4em] mb-2 md:mb-4">
                   Verso Collection
                 </p>
-                <h2 className="text-3xl md:text-7xl font-serif text-white">
+                <h2 className="text-h2-fluid font-serif text-white">
                   {slide.title}
                 </h2>
               </div>

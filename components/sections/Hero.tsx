@@ -69,11 +69,11 @@ export default function Hero() {
         </Reveal>
 
         <div className="mb-8 md:mb-12">
-          <h1 className="text-5xl md:text-8xl lg:text-9xl font-serif text-white leading-tight mix-blend-difference">
+          <h1 className="text-h1-fluid font-serif text-white mix-blend-difference">
             <StaggeredText text="VERSO" />
           </h1>
           <Reveal variant="blur" delay={600}>
-            <span className="block text-2xl md:text-5xl italic text-amber-200/90 font-light mt-2 md:mt-4 font-serif">
+            <span className="block text-h3-fluid italic text-amber-200/90 font-light mt-2 md:mt-4 font-serif">
               Events & Venue
             </span>
           </Reveal>

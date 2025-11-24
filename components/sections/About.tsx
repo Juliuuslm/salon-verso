@@ -19,7 +19,7 @@ export default function About() {
           {/* Text */}
           <div className="order-2 lg:order-1">
             <Reveal direction="up" variant="blur">
-              <h2 className="text-4xl md:text-6xl font-serif text-white mb-8 md:mb-12 leading-[1.1]">
+              <h2 className="text-h2-fluid font-serif text-white mb-8 md:mb-12">
                 Diseño <br />
                 <span className="italic text-neutral-600">Interior</span>
               </h2>

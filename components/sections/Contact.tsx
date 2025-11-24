@@ -73,7 +73,7 @@ export default function Contact() {
           {/* Contact Info */}
           <div className="lg:w-1/3">
             <Reveal>
-              <h2 className="text-4xl md:text-5xl font-serif text-white mb-6 md:mb-8">
+              <h2 className="text-h2-fluid font-serif text-white mb-6 md:mb-8">
                 Hablemos
               </h2>
               <p className="text-neutral-400 font-light leading-relaxed mb-8 md:mb-12 text-sm md:text-base">

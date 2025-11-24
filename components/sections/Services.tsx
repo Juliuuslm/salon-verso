@@ -37,7 +37,7 @@ export default function Services() {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 border-b border-white/5 pb-8">
           <Reveal variant="blur" className="w-full md:w-auto">
-            <h2 className="text-3xl md:text-5xl font-serif text-white">
+            <h2 className="text-h2-fluid font-serif text-white">
               Servicios
             </h2>
           </Reveal>
