@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { useActiveSectionDetection } from "@/lib/hooks/useActiveSectionDetection";
 import type { NavLink } from "@/types";
 
 const NAV_LINKS: NavLink[] = [
@@ -15,11 +16,17 @@ const NAV_LINKS: NavLink[] = [
 
 /**
  * NAVBAR COMPONENT
- * Navegación principal con efecto de scroll y menú móvil
+ * Navegación principal con efecto de scroll, active state y menú móvil
+ * Muestra visualmente qué sección está en viewport
  */
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Detectar sección activa usando IntersectionObserver
+  const activeSection = useActiveSectionDetection(
+    NAV_LINKS.map((link) => link.id)
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,16 +64,30 @@ export default function Navbar() {
 
         {/* Desktop Links */}
         <div className="hidden md:flex space-x-8 lg:space-x-12">
-          {NAV_LINKS.map((link) => (
-            <button
-              key={link.id}
-              onClick={() => scrollToSection(link.id)}
-              className="text-[10px] lg:text-xs uppercase tracking-[0.2em] text-neutral-400 hover:text-amber-100 transition-all duration-300 relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-amber-400 transition-all duration-300 group-hover:w-full"></span>
-            </button>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
+                className={`text-[10px] lg:text-xs uppercase tracking-[0.2em] transition-all duration-300 relative group ${
+                  isActive
+                    ? "text-amber-400 font-semibold"
+                    : "text-neutral-400 hover:text-amber-100"
+                }`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {link.name}
+                <span
+                  className={`absolute -bottom-2 left-0 h-[1px] transition-all duration-300 ${
+                    isActive
+                      ? "w-full bg-amber-400"
+                      : "w-0 bg-amber-400 group-hover:w-full"
+                  }`}
+                ></span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Mobile Toggle */}
@@ -85,15 +106,23 @@ export default function Navbar() {
           mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        {NAV_LINKS.map((link) => (
-          <button
-            key={link.id}
-            onClick={() => scrollToSection(link.id)}
-            className="text-2xl font-serif text-white hover:text-amber-400 transition-colors"
-          >
-            {link.name}
-          </button>
-        ))}
+        {NAV_LINKS.map((link) => {
+          const isActive = activeSection === link.id;
+          return (
+            <button
+              key={link.id}
+              onClick={() => scrollToSection(link.id)}
+              className={`text-2xl font-serif transition-colors ${
+                isActive
+                  ? "text-amber-400 font-bold"
+                  : "text-white hover:text-amber-400"
+              }`}
+              aria-current={isActive ? "page" : undefined}
+            >
+              {link.name}
+            </button>
+          );
+        })}
       </div>
     </nav>
   );
