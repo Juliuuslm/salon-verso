@@ -198,15 +198,17 @@ success: { 500: '#22c55e', ... }
 
 ```
 lib/design-tokens/
-├── colors.ts                 (Paleta completa WCAG AA)
-├── spacing.ts                (Escala de espaciado)
-├── typography.ts             (Sistema tipográfico)
-├── motion.ts                 (Transiciones + animations)
-└── index.ts                  (Export central)
+├── colors.ts                     (Paleta completa WCAG AA)
+├── spacing.ts                    (Escala de espaciado)
+├── typography.ts                 (Sistema tipográfico)
+├── motion.ts                     (Transiciones + animations)
+├── borders.ts                    (Border radius + border styles)
+├── icons.ts                      (Icon sizing system)
+└── index.ts                      (Export central)
 
 lib/hooks/
-├── useFormValidation.ts      (Validación en tiempo real)
-└── useActiveSectionDetection.ts (Detección de sección activa)
+├── useFormValidation.ts          (Validación en tiempo real)
+└── useActiveSectionDetection.ts  (Detección de sección activa)
 ```
 
 ## 📝 Archivos Modificados
@@ -271,18 +273,34 @@ components/sections/
 - ✅ Gradient separators para mejor jerarquía visual
 - ✅ Text color mejorado (neutral-200 en quote)
 
-### **Próximas en FASE 3**
-- [ ] Border-radius consistency audit
-- [ ] Icon sizing system
-- [ ] Motion refinements
-- [ ] Final contrast audit y polishing
+### **FASE 3: Polish Final y Design System Completion** ✅
 
-### **FASE 3 - Polish**
-- [ ] Blur placeholders para imágenes (Next.js feature)
-- [ ] Border-radius consistency
-- [ ] Icon sizing system
-- [ ] Motion refinements
-- [ ] Final contrast audit
+#### **FASE 3.1: Border-Radius Consistency Audit** ✅
+- ✅ Audit completo de todos los valores `rounded-*` en componentes
+- ✅ Crear design token `borders.ts` con escala consistente:
+  - `radius.none` (0) para elementos sin redondeo
+  - `radius.xs` (2px) para elementos tiny
+  - `radius.sm` (4px) para elementos small
+  - `radius.md` (8px) para elementos medium (default)
+  - `radius.lg` (12px) para cards grandes
+  - `radius.xl` (16px) para elementos extra large
+  - `radius.2xl` (24px) para elementos muy grandes
+  - `radius.full` (9999px) para círculos
+- ✅ Border color tokens: default, subtle, muted, standard, strong, accent
+- ✅ Border width scale: xs (1px), sm (2px), md (3px), lg (4px)
+
+#### **FASE 3.2: Icon Sizing System** ✅
+- ✅ Crear design token `icons.ts` con escala completa
+- ✅ Icon sizes: xs (12px), sm (14px), base (16px), md (20px), lg (24px), xl (32px), 2xl (40px), 3xl (48px), 4px (64px)
+- ✅ Stroke width presets: light (1), normal (1.5), bold (2), thick (2.5)
+- ✅ Icon style presets para: nav, button, decorative, inline, header, validation, hero
+- ✅ Color presets para iconos: default, muted, subtle, strong, accent, error, success
+- ✅ Exportados desde index central de design-tokens
+
+#### **Próximas en FASE 3**
+- [ ] Motion refinements (transiciones y keyframes adicionales)
+- [ ] Final contrast audit WCAG AA completo
+- [ ] Documentation finalization
 
 ---
 
