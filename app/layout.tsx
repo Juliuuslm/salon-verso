@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ModalProvider from "@/components/providers/ModalProvider";
 
 export const metadata: Metadata = {
   title: "VERSO | Luxury Event Venue",
@@ -68,7 +69,9 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className="bg-[#0a0a0a] text-neutral-200 antialiased selection:bg-amber-500/30 overflow-x-hidden">
-        {children}
+        <ModalProvider>
+          {children}
+        </ModalProvider>
       </body>
     </html>
   );

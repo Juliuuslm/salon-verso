@@ -1,6 +1,9 @@
+"use client";
+
 import { Star, Music, Users } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
+import { useModal } from "@/lib/hooks/useModal";
 import type { Service } from "@/types";
 
 const SERVICES: Service[] = [
@@ -30,8 +33,11 @@ const SERVICES: Service[] = [
 /**
  * SERVICES SECTION
  * Presenta los servicios principales del salón
+ * Con modals interactivos para cada experiencia
  */
 export default function Services() {
+  const { openServiceModal } = useModal();
+
   return (
     <section id="services" className="py-20 md:py-32 bg-[#0c0c0c]">
       <div className="container mx-auto px-6">
@@ -54,7 +60,10 @@ export default function Services() {
             const IconComponent = service.icon;
             return (
               <Reveal key={service.id} delay={index * 100} className="h-full min-h-[400px]">
-                <div className="group relative bg-[#0a0a0a] p-8 md:p-12 h-full hover:bg-[#0f0f0f] transition-colors duration-700 flex flex-col justify-between">
+                <button
+                  onClick={() => openServiceModal(service.id)}
+                  className="w-full group relative bg-[#0a0a0a] p-8 md:p-12 h-full hover:bg-[#0f0f0f] transition-colors duration-700 flex flex-col justify-between text-left cursor-pointer border-0 outline-0"
+                >
                   <div>
                     <div className="mb-8 md:mb-12 text-amber-600/50 group-hover:text-amber-400 transition-colors duration-700">
                       <IconComponent size={32} strokeWidth={1} />
@@ -100,7 +109,7 @@ export default function Services() {
                       />
                     </span>
                   </div>
-                </div>
+                </button>
               </Reveal>
             );
           })}
