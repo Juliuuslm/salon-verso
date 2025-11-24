@@ -15,42 +15,42 @@ const TESTIMONIALS: Testimonial[] = [
   {
     id: "1",
     quote:
-      "Lo que más nos gustó fue la suite nupcial con ventanas enormes. Nos arreglamos con luz natural y el equipo nos avisó 10 minutos antes de cada momento importante. Cero estrés.",
+      "Lo que más nos gustó fue la suite nupcial con ventanas enormes. Nos arreglamos con luz natural y el equipo nos avisó 10 minutos antes de cada momento importante. Fue sin estrés de principio a fin.",
     author: "Isabella & Jorge R.",
     event: "Diciembre 2023",
   },
   {
     id: "2",
     quote:
-      "Necesitábamos un lugar que impresionara a 200 ejecutivos sin parecer ostentoso. Los techos altos y el sonido distribuido hicieron que las presentaciones se sintieran como TED Talks. Varios clientes nos preguntaron dónde fue.",
+      "Necesitábamos un lugar que impresionara a 200 ejecutivos sin parecer ostentoso. Los techos altos y el sonido distribuido hicieron que las presentaciones se sintieran como TED Talks. Después, muchos clientes nos preguntaron dónde había sido el evento.",
     author: "Magdalena C.",
     event: "Startup Summit 2024",
   },
   {
     id: "3",
     quote:
-      "Queríamos boda íntima pero con pista para bailar. VERSO nos montó la cena en el lounge (60 personas) y después abrieron la pista principal. El DJ y la banda tocaron al mismo tiempo en diferentes espacios. Toda la noche sin parar.",
+      "Queríamos boda íntima pero con pista para bailar. VERSO nos montó la cena en el lounge (60 personas) y después abrieron la pista principal. El DJ y la banda tocaron al mismo tiempo en diferentes espacios. Nuestros invitados bailaron toda la noche sin detenerse.",
     author: "Carlos y Sofía M.",
     event: "Abril 2024",
   },
   {
     id: "4",
     quote:
-      "Hicimos transmisión en vivo con 4 cámaras y el audio salió limpio sin rentar equipo extra. El WiFi de 1Gbps aguantó 300 dispositivos conectados simultáneamente. Nuestro equipo de IT quedó sorprendido.",
+      "Hicimos transmisión en vivo con 4 cámaras y el audio salió limpio sin rentar equipo extra. El WiFi de 1Gbps aguantó 300 dispositivos conectados simultáneamente. Nuestro equipo de IT quedó sorprendido por la estabilidad del sistema.",
     author: "David M.",
     event: "Conferencia Tech 2023",
   },
   {
     id: "5",
     quote:
-      "En octubre el clima estuvo impredecible. VERSO tiene clima por zonas, entonces tuvimos el cocktail en una temperatura y la pista más fresca. También coordinaron con nuestro fotógrafo sin que estuviéramos en medio.",
+      "En octubre el clima estuvo impredecible. VERSO tiene clima por zonas, entonces tuvimos el cocktail en una temperatura y la pista más fresca. También coordinaron todo con nuestro fotógrafo para que nosotros solo disfrutáramos del evento.",
     author: "Valentina & Alejandro L.",
     event: "Octubre 2023",
   },
   {
     id: "6",
     quote:
-      "Cumpleaños 50 de mi esposo. Queríamos elegante pero no formal. VERSO programó la iluminación en azul-dorado que combinaba con la decoración. El bartender creó un coctel signature con mezcal que fue todo un hit.",
+      "Cumpleaños 50 de mi esposo. Queríamos elegante pero no formal. VERSO programó la iluminación en azul-dorado que combinaba con la decoración. El bartender creó un coctel signature con mezcal que fue el éxito de la noche.",
     author: "Patricia R.",
     event: "Aniversario 2024",
   },
