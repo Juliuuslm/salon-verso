@@ -9,23 +9,23 @@ import type { GalleryImage } from "@/types";
 const GALLERY_IMAGES: GalleryImage[] = [
   {
     url: "https://images.unsplash.com/photo-1519225463359-191d4cf9ca3d?q=80&w=2070&auto=format&fit=crop",
-    title: "Bodas de Ensueño",
+    title: "Promesas Bajo Nuestros Techos",
   },
   {
     url: "https://images.unsplash.com/photo-1478147427282-58a87a120781?q=80&w=2070&auto=format&fit=crop",
-    title: "Cenas de Gala",
+    title: "Noches que Brillan",
   },
   {
     url: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?q=80&w=2162&auto=format&fit=crop",
-    title: "Decoración Floral",
+    title: "Flores que Cuentan Historias",
   },
   {
     url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop",
-    title: "Eventos Masivos",
+    title: "Cuando 300 se Sienten Íntimos",
   },
   {
     url: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop",
-    title: "Detalles Únicos",
+    title: "En los Detalles Vive la Magia",
   },
 ];
 
@@ -74,7 +74,7 @@ export default function Gallery() {
               GALLERY
             </h2>
             <span className="text-amber-500 text-[10px] md:text-xs tracking-[0.3em] uppercase block mb-2 md:mb-4">
-              Portafolio
+              Nuestra Colección
             </span>
             <h3 className="text-h3-fluid text-white font-serif">
               Momentos

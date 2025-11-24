@@ -9,21 +9,21 @@ const SERVICES: Service[] = [
     icon: Star,
     title: "Bodas & Nupcias",
     description:
-      "Coordinación integral. Desde la suite nupcial hasta el último baile, creamos una narrativa visual única.",
+      "Desde el primer nervio en la suite nupcial hasta el último baile bajo las luces. Cada boda en VERSO es una película que se vive una sola vez.",
   },
   {
     id: "gala",
     icon: Music,
     title: "Social & Gala",
     description:
-      "Atmósferas vibrantes. Audio de alta fidelidad oculto en la arquitectura y zonas lounge de diseño.",
+      "Noches que vibran. El sonido te envuelve sin que veas de dónde viene. Lounge que invitan a quedarse. Pistas que piden un baile más.",
   },
   {
     id: "corporate",
     icon: Users,
     title: "Corporate",
     description:
-      "Presentaciones de impacto. Pantallas 4K, streaming global y catering ejecutivo de alto nivel.",
+      "Tu mensaje merece un escenario a su altura. Tecnología invisible pero impecable. Catering que impresiona sin distraer de tu presentación.",
   },
 ];
 
@@ -38,7 +38,7 @@ export default function Services() {
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 border-b border-white/5 pb-8">
           <Reveal variant="blur" className="w-full md:w-auto">
             <h2 className="text-h2-fluid font-serif text-white">
-              Servicios
+              Experiencias
             </h2>
           </Reveal>
           <Reveal delay={200} className="w-full md:w-auto">
@@ -70,30 +70,30 @@ export default function Services() {
                     <ul className="text-xs text-neutral-500 space-y-2 mb-8">
                       {service.title === "Bodas & Nupcias" && (
                         <>
-                          <li>✓ Coordinación completa del evento</li>
-                          <li>✓ Ambientación personalizada</li>
-                          <li>✓ Servicio de catering premium</li>
+                          <li>✓ Coordinación de inicio a fin (sin que notes que estamos)</li>
+                          <li>✓ Ambientación única para tu historia</li>
+                          <li>✓ Catering que se convierte en conversación</li>
                         </>
                       )}
                       {service.title === "Social & Gala" && (
                         <>
-                          <li>✓ Equipamiento audiovisual avanzado</li>
-                          <li>✓ Diseño de ambientes</li>
-                          <li>✓ Servicio especializado</li>
+                          <li>✓ Sonido que abraza sin ser visto</li>
+                          <li>✓ Espacios que fluyen con tu ritmo</li>
+                          <li>✓ Detalles que generan conversación</li>
                         </>
                       )}
                       {service.title === "Corporate" && (
                         <>
-                          <li>✓ Infraestructura técnica</li>
-                          <li>✓ Streaming y conferencias</li>
-                          <li>✓ Servicio ejecutivo</li>
+                          <li>✓ Tecnología que desaparece en el fondo</li>
+                          <li>✓ Tu mensaje, brillante y claro</li>
+                          <li>✓ Experiencia que impresiona</li>
                         </>
                       )}
                     </ul>
                   </div>
                   <div className="overflow-hidden">
                     <span className="text-xs uppercase tracking-widest text-white/40 group-hover:text-amber-500 transition-colors duration-700 flex items-center gap-2">
-                      Conocer más{" "}
+                      Explorar Experiencia{" "}
                       <ArrowRight
                         size={12}
                         className="-translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500"
