@@ -256,10 +256,26 @@ components/sections/
 
 **Beneficio**: Responsividad perfecta en cualquier resolución sin hardcoding breakpoints
 
-### **Próximas en FASE 2**
-- [ ] Blur placeholders para imágenes
-- [ ] About section visual enhancements
-- [ ] Testimonials design improvements
+### **FASE 2.5: About Section Visual Enhancements** ✅
+- ✅ Blur placeholder para imagen (Next.js Image placeholder)
+- ✅ Decorative accent lines en esquinas (amber-500/20)
+- ✅ Mejor separación visual entre elementos
+- ✅ Smooth transitions en hover effects
+- ✅ Enhanced visual hierarchy
+
+### **FASE 2.6: Testimonials Design Improvements** ✅
+- ✅ Decorative gradient lines (top y bottom)
+- ✅ Mejor separación entre quote y autor
+- ✅ Quote icon estilizado con amber-500/30
+- ✅ Author section con enhanced typography
+- ✅ Gradient separators para mejor jerarquía visual
+- ✅ Text color mejorado (neutral-200 en quote)
+
+### **Próximas en FASE 3**
+- [ ] Border-radius consistency audit
+- [ ] Icon sizing system
+- [ ] Motion refinements
+- [ ] Final contrast audit y polishing
 
 ### **FASE 3 - Polish**
 - [ ] Blur placeholders para imágenes (Next.js feature)

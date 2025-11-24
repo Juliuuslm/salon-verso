@@ -45,12 +45,18 @@ export default function About() {
               className="relative z-10 w-full"
             >
               <div className="relative overflow-hidden group w-full">
+                {/* Decorative accent lines */}
+                <div className="absolute -top-4 -left-4 w-16 h-16 border border-amber-500/20 z-20"></div>
+                <div className="absolute -bottom-4 -right-4 w-16 h-16 border border-amber-500/20 z-20"></div>
+
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 z-10"></div>
                 <Image
                   src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop"
                   alt="Interior Verso"
                   width={800}
                   height={700}
+                  placeholder="blur"
+                  blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 700'%3E%3Crect fill='%23171717' width='800' height='700'/%3E%3C/svg%3E"
                   className="w-full h-[350px] md:h-[600px] lg:h-[700px] object-cover filter grayscale group-hover:grayscale-0 transition-all duration-[1500ms] ease-in-out scale-100 group-hover:scale-105"
                 />
               </div>
