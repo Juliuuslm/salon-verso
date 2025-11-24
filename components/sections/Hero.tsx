@@ -62,7 +62,7 @@ export default function Hero() {
           <div className="flex items-center justify-center gap-4 mb-6 opacity-90">
             <div className="h-[1px] w-8 md:w-12 bg-gradient-to-r from-transparent to-amber-200"></div>
             <p className="text-amber-100 tracking-[0.3em] md:tracking-[0.5em] uppercase text-[10px] md:text-xs font-light">
-              The Art of Celebration
+              El Arte de Celebrar
             </p>
             <div className="h-[1px] w-8 md:w-12 bg-gradient-to-l from-transparent to-amber-200"></div>
           </div>
@@ -74,15 +74,14 @@ export default function Hero() {
           </h1>
           <Reveal variant="blur" delay={600}>
             <span className="block text-h3-fluid italic text-amber-200/90 font-light mt-2 md:mt-4 font-serif">
-              Events & Venue
+              Salón de Eventos de Autor
             </span>
           </Reveal>
         </div>
 
         <Reveal delay={800} variant="blur" direction="up">
           <p className="text-neutral-300 text-base md:text-xl mb-12 font-light max-w-xl mx-auto leading-relaxed px-4">
-            Donde la arquitectura se encuentra con la elegancia. Un espacio
-            atemporal para quienes buscan la excelencia.
+            Techos que desafían los límites. Acústica que envuelve cada palabra. Un escenario donde tu historia cobra vida con precisión arquitectónica.
           </p>
         </Reveal>
 
@@ -93,7 +92,7 @@ export default function Hero() {
           >
             <div className="absolute inset-0 w-0 bg-amber-600 transition-all duration-[600ms] ease-out group-hover:w-full opacity-10"></div>
             <div className="relative z-10 flex items-center justify-center gap-2 text-xs md:text-sm uppercase tracking-[0.25em] text-amber-100 group-hover:text-white transition-colors">
-              Reservar{" "}
+              Agenda tu Visita Privada{" "}
               <Sparkles
                 size={14}
                 className="opacity-0 group-hover:opacity-100 transition-opacity duration-500"

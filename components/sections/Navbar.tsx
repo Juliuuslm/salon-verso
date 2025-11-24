@@ -10,7 +10,7 @@ const NAV_LINKS: NavLink[] = [
   { name: "El Salón", id: "about" },
   { name: "Servicios", id: "services" },
   { name: "Galería", id: "gallery" },
-  { name: "Love Notes", id: "testimonials" },
+  { name: "Historias", id: "testimonials" },
   { name: "Contacto", id: "contact" },
 ];
 

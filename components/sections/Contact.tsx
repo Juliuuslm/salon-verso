@@ -74,11 +74,10 @@ export default function Contact() {
           <div className="lg:w-1/3">
             <Reveal>
               <h2 className="text-h2-fluid font-serif text-white mb-6 md:mb-8">
-                Hablemos
+                Comienza Tu Historia
               </h2>
               <p className="text-neutral-400 font-light leading-relaxed mb-8 md:mb-12 text-sm md:text-base">
-                Las grandes historias comienzan con una conversación. Visita
-                nuestro showroom o agenda una videollamada.
+                VERSO se vive, no se describe. Agenda tu recorrido privado y descubre por qué quienes nos conocen, nos eligen.
               </p>
               <div className="space-y-6 text-xs md:text-sm uppercase tracking-widest text-neutral-300">
                 <div className="flex items-center gap-4 hover:text-amber-400 transition-colors cursor-pointer w-max">
@@ -289,9 +288,9 @@ export default function Contact() {
                   <div className="bg-green-500/10 border border-green-500/40 text-green-300 px-4 py-3 rounded flex items-start gap-3 animate-in fade-in">
                     <CheckCircle size={20} className="flex-shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-semibold text-sm">¡Mensaje enviado!</p>
+                      <p className="font-semibold text-sm">¡Tu mensaje llegó!</p>
                       <p className="text-xs text-green-200 mt-1">
-                        Responderemos en máximo 24 horas. Gracias por tu interés.
+                        Nuestro equipo de concierge se pondrá en contacto antes de 24 horas para comenzar a dar forma a tu visión.
                       </p>
                     </div>
                   </div>
@@ -300,9 +299,9 @@ export default function Contact() {
                   <div className="bg-red-500/10 border border-red-500/40 text-red-300 px-4 py-3 rounded flex items-start gap-3">
                     <AlertCircle size={20} className="flex-shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-semibold text-sm">Error al enviar</p>
+                      <p className="font-semibold text-sm">Algo no salió como esperábamos</p>
                       <p className="text-xs text-red-200 mt-1">
-                        Por favor intenta nuevamente o contáctanos directamente.
+                        Por favor intenta de nuevo, o llámanos al +52 (55) 8899 0000. Estamos aquí para ayudarte.
                       </p>
                     </div>
                   </div>
@@ -317,10 +316,10 @@ export default function Contact() {
                   {isSubmitting ? (
                     <span className="flex items-center justify-center gap-2">
                       <Loader size={16} className="animate-spin" />
-                      Enviando solicitud...
+                      Procesando...
                     </span>
                   ) : (
-                    "Solicitar Cotización"
+                    "Reservar mi Visita Privada"
                   )}
                 </button>
               </form>
