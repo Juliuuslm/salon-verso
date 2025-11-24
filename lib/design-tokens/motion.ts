@@ -111,7 +111,14 @@ export const animations = {
     to: { opacity: "1" },
   },
 
-  // Slide up
+  fadeOut: {
+    duration: "300ms",
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+    from: { opacity: "1" },
+    to: { opacity: "0" },
+  },
+
+  // Slide animations
   slideUp: {
     duration: "500ms",
     easing: "cubic-bezier(0.2, 0.65, 0.3, 0.9)",
@@ -119,7 +126,6 @@ export const animations = {
     to: { transform: "translateY(0)", opacity: "1" },
   },
 
-  // Slide down
   slideDown: {
     duration: "500ms",
     easing: "cubic-bezier(0.2, 0.65, 0.3, 0.9)",
@@ -127,11 +133,72 @@ export const animations = {
     to: { transform: "translateY(0)", opacity: "1" },
   },
 
-  // Scale
+  slideLeft: {
+    duration: "400ms",
+    easing: "cubic-bezier(0.2, 0.65, 0.3, 0.9)",
+    from: { transform: "translateX(1rem)", opacity: "0" },
+    to: { transform: "translateX(0)", opacity: "1" },
+  },
+
+  slideRight: {
+    duration: "400ms",
+    easing: "cubic-bezier(0.2, 0.65, 0.3, 0.9)",
+    from: { transform: "translateX(-1rem)", opacity: "0" },
+    to: { transform: "translateX(0)", opacity: "1" },
+  },
+
+  // Scale animations
   scaleIn: {
     duration: "300ms",
     easing: "cubic-bezier(0.4, 0, 0.2, 1)",
     from: { transform: "scale(0.95)", opacity: "0" },
     to: { transform: "scale(1)", opacity: "1" },
+  },
+
+  scaleUp: {
+    duration: "400ms",
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+    from: { transform: "scale(0.9)", opacity: "0" },
+    to: { transform: "scale(1)", opacity: "1" },
+  },
+
+  // Blur entrance (used in Reveal component)
+  blurIn: {
+    duration: "600ms",
+    easing: "cubic-bezier(0.2, 0.65, 0.3, 0.9)",
+    from: { filter: "blur(10px)", opacity: "0" },
+    to: { filter: "blur(0)", opacity: "1" },
+  },
+
+  // Rotate animation (for icons)
+  rotate: {
+    duration: "300ms",
+    easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+    from: { transform: "rotate(0deg)" },
+    to: { transform: "rotate(180deg)" },
+  },
+
+  // Pulse animation (for active states)
+  pulse: {
+    duration: "2000ms",
+    easing: "cubic-bezier(0.4, 0, 0.6, 1)",
+    // Requires keyframes in global CSS
+    animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+  },
+
+  // Bounce (for subtle attention)
+  bounce: {
+    duration: "600ms",
+    easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+    from: { transform: "translateY(0)" },
+    to: { transform: "translateY(-0.5rem)" },
+  },
+
+  // Shimmer (for loading states)
+  shimmer: {
+    duration: "2000ms",
+    easing: "linear",
+    // Requires keyframes in global CSS
+    animation: "shimmer 2s linear infinite",
   },
 } as const;
