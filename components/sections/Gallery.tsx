@@ -8,23 +8,23 @@ import type { GalleryImage } from "@/types";
 
 const GALLERY_IMAGES: GalleryImage[] = [
   {
-    url: "https://images.unsplash.com/photo-1519225463359-191d4cf9ca3d?q=80&w=2070&auto=format&fit=crop",
+    url: "/images/gallery/gallery-1.jpg",
     title: "Promesas Bajo Nuestros Techos",
   },
   {
-    url: "https://images.unsplash.com/photo-1478147427282-58a87a120781?q=80&w=2070&auto=format&fit=crop",
+    url: "/images/gallery/gallery-2.jpg",
     title: "Noches que Brillan",
   },
   {
-    url: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?q=80&w=2162&auto=format&fit=crop",
+    url: "/images/gallery/gallery-3.jpg",
     title: "Flores que Cuentan Historias",
   },
   {
-    url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop",
+    url: "/images/gallery/gallery-4.jpg",
     title: "Cuando 300 se Sienten Íntimos",
   },
   {
-    url: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop",
+    url: "/images/gallery/gallery-5.jpg",
     title: "En los Detalles Vive la Magia",
   },
 ];

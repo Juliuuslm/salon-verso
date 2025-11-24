@@ -45,7 +45,7 @@ export default function Hero() {
           }}
         >
           <Image
-            src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=2098&auto=format&fit=crop"
+            src="/images/hero/hero.jpg"
             alt="Salón Verso Luxury"
             fill
             className="object-cover"

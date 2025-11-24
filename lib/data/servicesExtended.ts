@@ -31,8 +31,7 @@ export const SERVICES_EXTENDED: Record<string, ServiceExtended> = {
 VERSO entiende que tu día es la culminación de una historia. Por eso cada detalle, desde la iluminación que acaricia los techos hasta el servicio invisible que envuelve a tus invitados, está diseñado para que te olvides del logística y solo sientas la magia.
 
 Nuestro equipo de concierge coordina cada momento sin que notes que estamos. Mientras tú vives, nosotros cuidamos.`,
-    heroImage:
-      "https://images.unsplash.com/photo-1519225463359-191d4cf9ca3d?q=80&w=2070&auto=format&fit=crop",
+    heroImage: "/images/gallery/gallery-1.jpg",
     specs: [
       { label: "Capacidad", value: "50-300 invitados" },
       { label: "Altura de Techos", value: "5.5m de piso a techo" },
@@ -57,19 +56,19 @@ Nuestro equipo de concierge coordina cada momento sin que notes que estamos. Mie
     ],
     galleryImages: [
       {
-        url: "https://images.unsplash.com/photo-1519225463359-191d4cf9ca3d?q=80&w=2070&auto=format&fit=crop",
+        url: "/images/gallery/gallery-1.jpg",
         title: "Suite Nupcial",
       },
       {
-        url: "https://images.unsplash.com/photo-1478147427282-58a87a120781?q=80&w=2070&auto=format&fit=crop",
+        url: "/images/gallery/gallery-2.jpg",
         title: "Pista de Baile",
       },
       {
-        url: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?q=80&w=2162&auto=format&fit=crop",
+        url: "/images/gallery/gallery-3.jpg",
         title: "Ambientación",
       },
       {
-        url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop",
+        url: "/images/gallery/gallery-4.jpg",
         title: "Detalles",
       },
     ],
@@ -85,8 +84,7 @@ Nuestro equipo de concierge coordina cada momento sin que notes que estamos. Mie
 En VERSO, sabemos que una gala no es solo un evento: es una experiencia sensorial donde el diseño desaparece y queda solo la atmósfera. Techos que amplían el espacio, luz que seduce, acústica que envuelve sin abrumar.
 
 Tu evento social merece un escenario donde los detalles trascienden. Donde los invitados se mueven como en una película. Donde la conversación fluye porque el ambiente lo permite.`,
-    heroImage:
-      "https://images.unsplash.com/photo-1478147427282-58a87a120781?q=80&w=2070&auto=format&fit=crop",
+    heroImage: "/images/gallery/gallery-2.jpg",
     specs: [
       { label: "Capacidad", value: "100-350 personas" },
       { label: "Pista de Baile", value: "120m² acústica perfecta" },
@@ -111,19 +109,19 @@ Tu evento social merece un escenario donde los detalles trascienden. Donde los i
     ],
     galleryImages: [
       {
-        url: "https://images.unsplash.com/photo-1478147427282-58a87a120781?q=80&w=2070&auto=format&fit=crop",
+        url: "/images/gallery/gallery-2.jpg",
         title: "Ambiente Gala",
       },
       {
-        url: "https://images.unsplash.com/photo-1519225463359-191d4cf9ca3d?q=80&w=2070&auto=format&fit=crop",
+        url: "/images/gallery/gallery-3.jpg",
         title: "Lounge Premium",
       },
       {
-        url: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop",
+        url: "/images/gallery/gallery-4.jpg",
         title: "Detalles Luminosos",
       },
       {
-        url: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?q=80&w=2162&auto=format&fit=crop",
+        url: "/images/gallery/gallery-5.jpg",
         title: "Configuración Flexible",
       },
     ],
@@ -139,8 +137,7 @@ Tu evento social merece un escenario donde los detalles trascienden. Donde los i
 En VERSO entendemos que un evento corporativo es una oportunidad de liderazgo. La acústica perfecta asegura que cada palabra resuena. Los techos altos dan sensación de amplitud y confianza. La iluminación arquitectónica posiciona tu marca sin ser obvia.
 
 No se trata de complejidad, sino de precisión. Cada elemento orquestado para que tu mensaje sea el protagonista.`,
-    heroImage:
-      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop",
+    heroImage: "/images/gallery/gallery-4.jpg",
     specs: [
       { label: "Capacidad", value: "80-400 personas" },
       { label: "Audio/Video", value: "Sistema profesional 4K" },
@@ -165,19 +162,19 @@ No se trata de complejidad, sino de precisión. Cada elemento orquestado para qu
     ],
     galleryImages: [
       {
-        url: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop",
+        url: "/images/gallery/gallery-1.jpg",
         title: "Sala Principal",
       },
       {
-        url: "https://images.unsplash.com/photo-1519225463359-191d4cf9ca3d?q=80&w=2070&auto=format&fit=crop",
+        url: "/images/gallery/gallery-3.jpg",
         title: "Breakout Rooms",
       },
       {
-        url: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop",
+        url: "/images/gallery/gallery-4.jpg",
         title: "Escenario Premium",
       },
       {
-        url: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?q=80&w=2162&auto=format&fit=crop",
+        url: "/images/gallery/gallery-5.jpg",
         title: "Tecnología Integrada",
       },
     ],

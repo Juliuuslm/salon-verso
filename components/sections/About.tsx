@@ -51,7 +51,7 @@ export default function About() {
 
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 z-10"></div>
                 <Image
-                  src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop"
+                  src="/images/about/about.jpg"
                   alt="Interior Verso"
                   width={800}
                   height={700}
