@@ -62,13 +62,38 @@ export default function Services() {
                     <h3 className="text-xl md:text-2xl font-serif text-white mb-4 md:mb-6 group-hover:translate-x-2 transition-transform duration-700">
                       {service.title}
                     </h3>
-                    <p className="text-neutral-500 font-light leading-relaxed mb-8 group-hover:text-neutral-400 transition-colors duration-700 text-sm md:text-base">
+                    <p className="text-neutral-400 leading-relaxed mb-6 group-hover:text-neutral-300 transition-colors duration-700 text-sm md:text-base">
                       {service.description}
                     </p>
+
+                    {/* Features list */}
+                    <ul className="text-xs text-neutral-500 space-y-2 mb-8">
+                      {service.title === "Bodas & Nupcias" && (
+                        <>
+                          <li>✓ Coordinación completa del evento</li>
+                          <li>✓ Ambientación personalizada</li>
+                          <li>✓ Servicio de catering premium</li>
+                        </>
+                      )}
+                      {service.title === "Social & Gala" && (
+                        <>
+                          <li>✓ Equipamiento audiovisual avanzado</li>
+                          <li>✓ Diseño de ambientes</li>
+                          <li>✓ Servicio especializado</li>
+                        </>
+                      )}
+                      {service.title === "Corporate" && (
+                        <>
+                          <li>✓ Infraestructura técnica</li>
+                          <li>✓ Streaming y conferencias</li>
+                          <li>✓ Servicio ejecutivo</li>
+                        </>
+                      )}
+                    </ul>
                   </div>
                   <div className="overflow-hidden">
                     <span className="text-xs uppercase tracking-widest text-white/40 group-hover:text-amber-500 transition-colors duration-700 flex items-center gap-2">
-                      Explorar{" "}
+                      Conocer más{" "}
                       <ArrowRight
                         size={12}
                         className="-translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500"
