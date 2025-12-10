@@ -64,7 +64,7 @@ export default function Gallery() {
   return (
     <section
       id="gallery"
-      className="relative bg-transparent pb-20 md:pb-32 pt-12 overflow-hidden"
+      className="relative bg-[#0a0a0a] pb-20 md:pb-32 pt-12 overflow-hidden"
     >
       {/* Header */}
       <div className="container mx-auto px-6 mb-8 md:mb-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-6 z-20 relative">
@@ -120,8 +120,8 @@ export default function Gallery() {
       </div>
 
       {/* Thumbnail Navigation */}
-      <div className="container mx-auto px-6 -mb-8 md:-mb-12 relative z-30">
-        <div className="flex gap-2 md:gap-4 overflow-x-auto pb-2">
+      <div className="container mx-auto px-6 mb-6 md:mb-8">
+        <div className="flex gap-2 md:gap-4 overflow-x-auto items-center px-6 py-4">
           {GALLERY_IMAGES.map((_, index) => (
             <button
               key={index}
@@ -154,7 +154,7 @@ export default function Gallery() {
       </div>
 
       {/* Carousel */}
-      <div className="relative z-0 w-full h-[50vh] md:h-[80vh] bg-[#050505]">
+      <div className="relative w-full h-[50vh] md:h-[80vh] bg-[#050505]">
         {GALLERY_IMAGES.map((slide, index) => (
           <div
             key={index}
