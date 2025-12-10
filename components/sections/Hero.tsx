@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { Sparkles } from "lucide-react";
 import Image from "next/image";
 import Reveal from "@/components/ui/Reveal";
-import StaggeredText from "@/components/ui/StaggeredText";
 
 /**
  * HERO SECTION
@@ -65,19 +64,11 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-20 text-center px-4 max-w-6xl mx-auto w-full">
-        <Reveal variant="blur" delay={200}>
-          <div className="flex items-center justify-center gap-4 mb-6 opacity-90">
-            <div className="h-[1px] w-8 md:w-12 bg-gradient-to-r from-transparent to-amber-200"></div>
-            <p className="text-amber-100 tracking-[0.3em] md:tracking-[0.5em] uppercase text-[10px] md:text-xs font-light">
-              El Arte de Celebrar
-            </p>
-            <div className="h-[1px] w-8 md:w-12 bg-gradient-to-l from-transparent to-amber-200"></div>
-          </div>
-        </Reveal>
-
         <div className="mb-8 md:mb-12">
-          <h1 className="text-h1-fluid font-serif text-white mix-blend-difference">
-            <StaggeredText text="VERSO" />
+          <h1 className="text-h1-fluid font-serif text-white tracking-[0.15em] uppercase">
+            <Reveal variant="blur" delay={200}>
+              El Arte de Celebrar
+            </Reveal>
           </h1>
           <Reveal variant="blur" delay={600}>
             <span className="block text-h3-fluid italic text-amber-200/90 font-light mt-2 md:mt-4 font-serif">
