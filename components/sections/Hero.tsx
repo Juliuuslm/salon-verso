@@ -95,10 +95,10 @@ export default function Hero() {
         <Reveal delay={1000} variant="blur">
           <button
             onClick={() => scrollToSection("contact")}
-            className="group relative px-8 py-3 md:px-12 md:py-4 bg-transparent overflow-hidden rounded-sm border border-amber-500/30 hover:border-amber-400 transition-colors duration-500 mx-auto block"
+            className="group relative px-8 py-3 md:px-12 md:py-4 bg-amber-500 hover:bg-transparent overflow-hidden rounded-sm border border-amber-500 hover:border-amber-400 transition-colors duration-500 mx-auto block"
           >
-            <div className="absolute inset-0 w-0 bg-amber-600 transition-all duration-[600ms] ease-out group-hover:w-full opacity-10"></div>
-            <div className="relative z-10 flex items-center justify-center gap-2 text-xs md:text-sm uppercase tracking-[0.25em] text-amber-100 group-hover:text-white transition-colors">
+            <div className="absolute inset-0 w-0 bg-amber-600 transition-all duration-[600ms] ease-out group-hover:w-full opacity-0"></div>
+            <div className="relative z-10 flex items-center justify-center gap-2 text-xs md:text-sm uppercase tracking-[0.25em] text-slate-900 group-hover:text-amber-200 transition-colors">
               Agenda tu Visita Privada{" "}
               <Sparkles
                 size={14}
