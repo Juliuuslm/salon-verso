@@ -129,10 +129,10 @@ export default function Gallery() {
                 goToSlide(index);
                 setIsAutoPlay(false);
               }}
-              className={`flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg border-2 transition-all duration-300 overflow-hidden ${
+              className={`flex-shrink-0 w-24 h-24 md:w-32 md:h-32 rounded-lg border-2 transition-all duration-500 overflow-hidden ${
                 index === currentSlide
-                  ? "border-amber-400 ring-2 ring-amber-400/30"
-                  : "border-white/10 hover:border-white/30"
+                  ? "border-amber-400 ring-2 ring-amber-400/50 scale-105"
+                  : "border-white/10 hover:border-white/30 hover:scale-100"
               }`}
               aria-label={`Ir a slide ${index + 1}`}
               aria-current={index === currentSlide ? "true" : undefined}
@@ -140,9 +140,13 @@ export default function Gallery() {
               <Image
                 src={GALLERY_IMAGES[index].url}
                 alt={GALLERY_IMAGES[index].title}
-                width={80}
-                height={80}
-                className="w-full h-full object-cover"
+                width={128}
+                height={128}
+                className={`w-full h-full object-cover transition-all duration-500 ${
+                  index === currentSlide
+                    ? "grayscale-0 brightness-110"
+                    : "grayscale hover:grayscale-75"
+                }`}
               />
             </button>
           ))}
