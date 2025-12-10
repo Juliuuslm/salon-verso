@@ -54,6 +54,13 @@ export default function Hero() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]/30 z-10"></div>
+        {/* Radial gradient overlay for text protection */}
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            background: "radial-gradient(ellipse at center, rgba(10, 10, 10, 0.5) 0%, rgba(10, 10, 10, 0.25) 35%, transparent 70%)",
+          }}
+        ></div>
       </div>
 
       {/* Content */}
