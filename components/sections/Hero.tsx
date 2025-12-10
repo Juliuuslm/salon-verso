@@ -88,7 +88,7 @@ export default function Hero() {
 
         <Reveal delay={800} variant="blur" direction="up">
           <p className="text-neutral-300 text-base md:text-xl mb-12 font-light max-w-xl mx-auto leading-relaxed px-4">
-            Techos que desafían los límites. Acústica que envuelve cada palabra. Un escenario donde tu historia cobra vida con precisión arquitectónica.
+            Un escenario donde tu historia cobra vida con precisión arquitectónica.
           </p>
         </Reveal>
 
