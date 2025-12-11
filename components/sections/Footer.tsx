@@ -35,7 +35,7 @@ export default function Footer() {
           href="https://aurora33.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-amber-400 hover:text-amber-300 transition-colors cursor-pointer"
+          className="text-amber-400 hover:text-amber-300 transition-colors cursor-pointer normal-case"
         >
           aurora33
         </a>
