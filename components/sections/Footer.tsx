@@ -30,10 +30,7 @@ export default function Footer() {
         ))}
       </div>
       <p className="text-neutral-700 text-[10px] uppercase tracking-widest">
-        © {currentYear} Verso Venue. Todos los derechos reservados.
-      </p>
-      <p className="text-neutral-800 text-[8px] uppercase tracking-widest mt-4">
-        Powered by Novalabss
+        Copyright © {currentYear} Verso Venue. Built with love and AI by Aurora33
       </p>
     </footer>
   );
