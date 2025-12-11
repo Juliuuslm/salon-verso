@@ -47,15 +47,23 @@ export default function Modal({
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
+
+      // Bloquear scroll del wheel en la página principal
+      const handleWheel = (e: WheelEvent) => {
+        e.preventDefault();
+      };
+
+      document.addEventListener("wheel", handleWheel, { passive: false });
+
+      return () => {
+        document.removeEventListener("wheel", handleWheel);
+        document.body.style.overflow = "";
+        document.body.style.paddingRight = "";
+      };
     } else {
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
     }
-
-    return () => {
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-    };
   }, [isOpen]);
 
   // Animaciones con GSAP
