@@ -54,6 +54,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: "/Favicons/Fav-icon-verso.png",
+    apple: "/Favicons/Fav-icon-verso.png",
+  },
 };
 
 export default function RootLayout({
@@ -66,7 +70,6 @@ export default function RootLayout({
       <head>
         <meta name="theme-color" content="#0a0a0a" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </head>
       <body className="bg-[#0a0a0a] text-neutral-200 antialiased selection:bg-amber-500/30 overflow-x-hidden">
         <ModalProvider>
