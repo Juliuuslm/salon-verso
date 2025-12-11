@@ -13,6 +13,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Permitir scroll táctil natural en elementos con overflow */
+[class*="overflow-y-auto"] {
+  scroll-behavior: auto !important;
+}
+
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
