@@ -40,21 +40,19 @@ export default function Modal({
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const isAnimatingRef = useRef(false);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const { pauseScroll, resumeScroll } = useScrollContext();
 
-  // Guardar scrollY en un ref para usar en cleanup
+  // Guardar scrollY en un ref para restaurar después
   const scrollYRef = useRef<number>(0);
 
-  // Scroll lock with boundary detection - usar useLayoutEffect para ejecutar ANTES del render
+  // Bloquear scroll del body cuando el modal está abierto
   useLayoutEffect(() => {
     if (isOpen) {
-      // Pausar Lenis PRIMERO
+      // Pausar Lenis (smooth scroll library)
       pauseScroll();
 
-      // Remover transformaciones de Lenis inmediatamente
+      // Remover transformaciones de Lenis
       document.documentElement.style.transform = "none";
       document.documentElement.style.width = "100%";
       document.documentElement.style.height = "100%";
@@ -64,98 +62,14 @@ export default function Modal({
       scrollYRef.current = window.scrollY;
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
-      // Fijar el body en la posición actual ANTES de que React pinte
+      // Fijar el body para bloquear scroll de la página principal
       document.body.style.position = "fixed";
       document.body.style.top = `-${scrollYRef.current}px`;
       document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
 
-      // Detecta si el scroll está en los límites del contenedor
-      const isAtScrollBoundary = (
-        container: HTMLElement,
-        deltaY: number
-      ): boolean => {
-        const { scrollTop, scrollHeight, clientHeight } = container;
-        const THRESHOLD = 1;
-
-        // Scrolling UP mientras estamos en el TOP
-        if (deltaY < 0 && scrollTop <= THRESHOLD) {
-          return true;
-        }
-
-        // Scrolling DOWN mientras estamos en el BOTTOM
-        if (deltaY > 0 && scrollTop + clientHeight >= scrollHeight - THRESHOLD) {
-          return true;
-        }
-
-        return false;
-      };
-
-      // Handler para bloquear scroll en todo el documento
-      const handleWheel = (e: WheelEvent) => {
-        const target = e.target as HTMLElement;
-        const scrollContainer = scrollContainerRef.current;
-
-        // Si el evento NO está dentro del scrollContainer, bloquearlo completamente
-        if (!scrollContainer?.contains(target)) {
-          e.preventDefault();
-          e.stopPropagation();
-          return;
-        }
-
-        // Bloquear durante animaciones
-        if (isAnimatingRef.current) {
-          e.preventDefault();
-          e.stopPropagation();
-          return;
-        }
-
-        // Si estamos en los límites, bloquear
-        if (isAtScrollBoundary(scrollContainer, e.deltaY)) {
-          e.preventDefault();
-          e.stopPropagation();
-          return;
-        }
-
-        // En otro caso, hacer scroll manual (sin preventDefault aquí)
-        scrollContainer.scrollTop += e.deltaY;
-        e.preventDefault();
-        e.stopPropagation();
-      };
-
-      // Handler para touch events - SIMPLE: solo bloquear fuera del scrollContainer
-      // El scroll nativo del navigador debe funcionar sin preventDefault dentro del container
-      const handleTouchMove = (e: TouchEvent) => {
-        const target = e.target as HTMLElement;
-        const scrollContainer = scrollContainerRef.current;
-
-        // Si el evento NO está dentro del scrollContainer, bloquearlo completamente
-        if (!scrollContainer?.contains(target)) {
-          e.preventDefault();
-          e.stopPropagation();
-          return;
-        }
-
-        // Bloquear durante animaciones
-        if (isAnimatingRef.current) {
-          e.preventDefault();
-          e.stopPropagation();
-          return;
-        }
-
-        // IMPORTANTE: NO hacer preventDefault dentro del scrollContainer
-        // Necesitamos permitir que el scroll nativo funcione
-      };
-
-      // Usar capture phase para interceptar eventos más temprano
-      document.addEventListener("wheel", handleWheel, { passive: false, capture: true });
-      document.addEventListener("touchmove", handleTouchMove, { passive: false, capture: true });
-
       return () => {
-        document.removeEventListener("wheel", handleWheel, true);
-        document.removeEventListener("touchmove", handleTouchMove, true);
-
         // Restaurar estilos del HTML
         document.documentElement.style.transform = "";
         document.documentElement.style.width = "";
@@ -169,7 +83,7 @@ export default function Modal({
         document.body.style.overflow = "";
         document.body.style.paddingRight = "";
 
-        // Restaurar scroll
+        // Restaurar scroll a la posición anterior
         window.scrollTo(0, scrollYRef.current);
 
         // Reanudar Lenis
@@ -183,16 +97,10 @@ export default function Modal({
     if (!modalRef.current || !overlayRef.current) return;
 
     if (isOpen) {
-      isAnimatingRef.current = true;
       timelineRef.current = animateModalIn(
         modalRef.current,
         overlayRef.current
       );
-
-      // Desbloquear scroll cuando termine la animación de entrada
-      timelineRef.current.eventCallback("onComplete", () => {
-        isAnimatingRef.current = false;
-      });
     } else {
       timelineRef.current = animateModalOut(
         modalRef.current,
@@ -290,16 +198,8 @@ export default function Modal({
           </button>
         )}
 
-        {/* Content */}
-        <div
-          ref={scrollContainerRef}
-          className="w-full flex-1 overflow-y-auto overscroll-contain max-h-screen"
-          style={{
-            overscrollBehavior: "contain",
-            WebkitOverflowScrolling: "touch",
-            touchAction: "pan-y"
-          }}
-        >
+        {/* Content - Scroll nativo puro */}
+        <div className="w-full flex-1 overflow-y-auto">
           {children}
         </div>
       </div>

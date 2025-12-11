@@ -13,9 +13,11 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Permitir scroll táctil natural en elementos con overflow */
+/* Scroll táctil nativo optimizado */
 [class*="overflow-y-auto"] {
   scroll-behavior: auto !important;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 * {
