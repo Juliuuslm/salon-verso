@@ -59,33 +59,23 @@ export default function Modal({
 
       // Remover transformaciones de Lenis
       document.documentElement.style.transform = "none";
-      document.documentElement.style.width = "100%";
-      document.documentElement.style.height = "100%";
       document.documentElement.style.overflow = "hidden";
 
-      // Fijar el body para bloquear scroll de la página principal
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollYRef.current}px`;
-      document.body.style.width = "100%";
+      // Bloquear scroll de la página principal usando overflow hidden
+      // NO usamos position: fixed porque rompe el scroll nativo dentro del modal
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
 
       return () => {
-        // CLEANUP SEQUENCE - CRÍTICO PARA DESKTOP
+        // CLEANUP SEQUENCE
 
-        // PASO 1: Restaurar body PRIMERO usando removeProperty
-        // removeProperty() remueve completamente las propiedades inline, no solo las establece a ""
-        document.body.style.removeProperty("position");
-        document.body.style.removeProperty("top");
-        document.body.style.removeProperty("width");
+        // PASO 1: Restaurar HTML usando removeProperty
+        document.documentElement.style.removeProperty("transform");
+        document.documentElement.style.removeProperty("overflow");
+
+        // PASO 2: Restaurar body usando removeProperty
         document.body.style.removeProperty("overflow");
         document.body.style.removeProperty("padding-right");
-
-        // PASO 2: Restaurar HTML usando removeProperty
-        document.documentElement.style.removeProperty("transform");
-        document.documentElement.style.removeProperty("width");
-        document.documentElement.style.removeProperty("height");
-        document.documentElement.style.removeProperty("overflow");
 
         // PASO 3: Restaurar scroll inmediatamente
         window.scrollTo(0, scrollYRef.current);
@@ -121,28 +111,9 @@ export default function Modal({
       }
     };
 
-    const handleWheel = (e: WheelEvent) => {
-      const scrollContainer = scrollContainerRef.current;
-
-      if (!scrollContainer) return;
-
-      const target = e.target as HTMLElement;
-
-      // Permitir scroll si el wheel está dentro del scroll container
-      if (scrollContainer.contains(target)) {
-        return;
-      }
-
-      // Bloquear wheel si está fuera del scroll container
-      e.preventDefault();
-    };
-
     document.addEventListener("touchmove", handleTouchMove, { passive: false });
-    document.addEventListener("wheel", handleWheel, { passive: false });
-
     return () => {
       document.removeEventListener("touchmove", handleTouchMove);
-      document.removeEventListener("wheel", handleWheel);
     };
   }, [isOpen]);
 
