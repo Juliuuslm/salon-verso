@@ -162,7 +162,11 @@ export default function Gallery() {
               index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
-            <div className="absolute inset-0 bg-black/40 z-10"></div>
+            <div
+              className={`absolute inset-0 bg-black/40 z-10 transition-transform duration-[10000ms] ease-linear ${
+                index === currentSlide ? "scale-110" : "scale-100"
+              }`}
+            ></div>
             <Image
               src={slide.url}
               alt={slide.title}
