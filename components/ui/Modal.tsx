@@ -39,29 +39,106 @@ export default function Modal({
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const isAnimatingRef = useRef(false);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
-  // Scroll lock
+  // Scroll lock with boundary detection
   useEffect(() => {
     if (isOpen) {
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
 
-      // Permitir scroll dentro del modal, bloquear fuera
+      // Detecta si el scroll está en los límites del contenedor
+      const isAtScrollBoundary = (
+        container: HTMLElement,
+        deltaY: number
+      ): boolean => {
+        const { scrollTop, scrollHeight, clientHeight } = container;
+        const THRESHOLD = 1;
+
+        // Scrolling UP mientras estamos en el TOP
+        if (deltaY < 0 && scrollTop <= THRESHOLD) {
+          return true;
+        }
+
+        // Scrolling DOWN mientras estamos en el BOTTOM
+        if (deltaY > 0 && scrollTop + clientHeight >= scrollHeight - THRESHOLD) {
+          return true;
+        }
+
+        return false;
+      };
+
+      // Handler para wheel events
       const handleWheel = (e: WheelEvent) => {
-        // Si el scroll está dentro del modal o sus elementos, permitir
-        if (modalRef.current?.contains(e.target as Node)) {
+        // Bloquear scroll durante animaciones
+        if (isAnimatingRef.current) {
+          e.preventDefault();
           return;
         }
-        // Si está fuera del modal, bloquear
+
+        const target = e.target as Node;
+
+        // Si el evento NO está dentro del modal, bloquearlo completamente
+        if (!modalRef.current?.contains(target)) {
+          e.preventDefault();
+          return;
+        }
+
+        // Obtener el scrollable container
+        const scrollContainer = scrollContainerRef.current;
+        if (!scrollContainer) {
+          e.preventDefault();
+          return;
+        }
+
+        // Si el target está dentro del scrollable container
+        if (scrollContainer.contains(target)) {
+          // Verificar si estamos en los límites del scroll
+          if (isAtScrollBoundary(scrollContainer, e.deltaY)) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+          }
+          // Permitir scroll normal dentro del contenedor
+          return;
+        }
+
+        // Para cualquier otro elemento dentro del modal, prevenir
         e.preventDefault();
       };
 
+      // Handler para touch events (mobile/tablet)
+      const handleTouchMove = (e: TouchEvent) => {
+        const target = e.target as Node;
+
+        // Si está fuera del modal, bloquear
+        if (!modalRef.current?.contains(target)) {
+          e.preventDefault();
+          return;
+        }
+
+        const scrollContainer = scrollContainerRef.current;
+
+        // Si no hay scrollContainer o el target no está en él, bloquear
+        if (!scrollContainer || !scrollContainer.contains(target)) {
+          e.preventDefault();
+          return;
+        }
+
+        // Para touch, confiamos en overscroll-behavior: contain
+        // No bloqueamos aquí para permitir scroll natural
+      };
+
+      // Registrar event listeners con { passive: false } para usar preventDefault
       document.addEventListener("wheel", handleWheel, { passive: false });
+      document.addEventListener("touchmove", handleTouchMove, { passive: false });
 
       return () => {
         document.removeEventListener("wheel", handleWheel);
+        document.removeEventListener("touchmove", handleTouchMove);
         document.body.style.overflow = "";
         document.body.style.paddingRight = "";
       };
@@ -76,10 +153,16 @@ export default function Modal({
     if (!modalRef.current || !overlayRef.current) return;
 
     if (isOpen) {
+      isAnimatingRef.current = true;
       timelineRef.current = animateModalIn(
         modalRef.current,
         overlayRef.current
       );
+
+      // Desbloquear scroll cuando termine la animación de entrada
+      timelineRef.current.eventCallback("onComplete", () => {
+        isAnimatingRef.current = false;
+      });
     } else {
       timelineRef.current = animateModalOut(
         modalRef.current,
@@ -177,7 +260,13 @@ export default function Modal({
         )}
 
         {/* Content */}
-        <div className="w-full flex-1 overflow-y-auto">{children}</div>
+        <div
+          ref={scrollContainerRef}
+          className="w-full flex-1 overflow-y-auto overscroll-contain"
+          style={{ overscrollBehavior: "contain" }}
+        >
+          {children}
+        </div>
       </div>
     </div>
   );
