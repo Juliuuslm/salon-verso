@@ -183,7 +183,7 @@ export default function Modal({
         role="dialog"
         aria-modal="true"
         aria-label={ariaLabel}
-        className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-sm overflow-hidden flex flex-col ${sizeClasses[size]} ${className || ""}`}
+        className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-sm overflow-hidden flex flex-col min-h-0 ${sizeClasses[size]} ${className || ""}`}
         style={{ maxHeight: "90dvh", willChange: "transform, opacity" }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -198,8 +198,8 @@ export default function Modal({
           </button>
         )}
 
-        {/* Content - Scroll nativo puro */}
-        <div className="w-full flex-1 overflow-y-auto">
+        {/* Content - Scroll nativo con flexbox optimizado */}
+        <div className="w-full flex-1 overflow-y-auto min-h-0 max-h-[90dvh]">
           {children}
         </div>
       </div>
