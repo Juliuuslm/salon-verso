@@ -130,7 +130,7 @@ export default function Gallery() {
                 }}
                 className={`flex-shrink-0 w-24 h-24 md:w-32 md:h-32 rounded-lg border-2 transition-all duration-500 overflow-hidden ${
                   index === currentSlide
-                    ? "border-amber-400 ring-2 ring-amber-400/50 scale-105"
+                    ? "border-white/10 scale-105"
                     : "border-white/10 hover:border-white/30 hover:scale-100"
                 }`}
                 aria-label={`Ir a slide ${index + 1}`}
