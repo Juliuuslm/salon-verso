@@ -89,9 +89,12 @@ export default function Modal({
         // PASO 3: Restaurar scroll inmediatamente
         window.scrollTo(0, scrollYRef.current);
 
-        // PASO 4: Esperar un frame antes de reactivar Lenis
+        // PASO 4: Esperar dos frames para que el navegador estabilice completamente
+        // antes de reactivar Lenis (es crítico para sincronización correcta)
         requestAnimationFrame(() => {
-          resumeScroll();
+          requestAnimationFrame(() => {
+            resumeScroll();
+          });
         });
       };
     }
