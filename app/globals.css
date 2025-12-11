@@ -13,6 +13,12 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Scroll táctil nativo optimizado */
+[class*="overflow-y-auto"] {
+  scroll-behavior: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
