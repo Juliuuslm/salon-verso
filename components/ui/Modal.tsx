@@ -98,11 +98,15 @@ export default function Modal({
     if (!isOpen) return;
 
     const handleTouchMove = (e: TouchEvent) => {
-      const target = e.target as HTMLElement;
       const scrollContainer = scrollContainerRef.current;
+      if (!scrollContainer) return;
+
+      // Usar composedPath() para verificar correctamente si está dentro del scroll container
+      const path = e.composedPath();
+      const isInsideScrollContainer = path.includes(scrollContainer);
 
       // Solo bloquear si NO está dentro del scroll container
-      if (!scrollContainer?.contains(target)) {
+      if (!isInsideScrollContainer) {
         e.preventDefault();
       }
     };
@@ -205,7 +209,7 @@ export default function Modal({
         aria-modal="true"
         aria-label={ariaLabel}
         className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-sm overflow-hidden flex flex-col min-h-0 pointer-events-auto ${sizeClasses[size]} ${className || ""}`}
-        style={{ maxHeight: "90dvh", willChange: "transform, opacity" }}
+        style={{ maxHeight: "90dvh", willChange: "transform, opacity", touchAction: "none" }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -223,6 +227,11 @@ export default function Modal({
         <div
           ref={scrollContainerRef}
           className="w-full flex-1 overflow-y-auto min-h-0 max-h-[90dvh] pointer-events-auto"
+          style={{
+            WebkitOverflowScrolling: "touch",
+            touchAction: "auto",
+            WebkitTouchCallout: "none",
+          }}
         >
           {children}
         </div>
