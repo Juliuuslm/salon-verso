@@ -70,7 +70,7 @@ export default function Gallery() {
       <div className="container mx-auto px-6 mb-8 md:mb-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-6 z-20 relative">
         <Reveal>
           <div>
-            <h2 className="text-6xl md:text-9xl font-serif text-white/2 absolute -top-8 md:-top-12 left-0 select-none pointer-events-none">
+            <h2 className="text-6xl md:text-9xl font-serif text-white absolute -top-8 md:-top-12 left-0 select-none pointer-events-none" style={{ opacity: 0.02 }}>
               GALLERY
             </h2>
             <span className="text-amber-500 text-[10px] md:text-xs tracking-[0.3em] uppercase block mb-2 md:mb-4">
