@@ -48,8 +48,13 @@ export default function Modal({
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
 
-      // Bloquear scroll del wheel en la página principal
+      // Permitir scroll dentro del modal, bloquear fuera
       const handleWheel = (e: WheelEvent) => {
+        // Si el scroll está dentro del modal o sus elementos, permitir
+        if (modalRef.current?.contains(e.target as Node)) {
+          return;
+        }
+        // Si está fuera del modal, bloquear
         e.preventDefault();
       };
 
