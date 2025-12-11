@@ -293,7 +293,7 @@ export default function Modal({
         {/* Content */}
         <div
           ref={scrollContainerRef}
-          className="w-full flex-1 overflow-y-auto overscroll-contain"
+          className="w-full flex-1 overflow-y-auto overscroll-contain max-h-screen"
           style={{
             overscrollBehavior: "contain",
             WebkitOverflowScrolling: "touch",
