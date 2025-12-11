@@ -121,9 +121,28 @@ export default function Modal({
       }
     };
 
+    const handleWheel = (e: WheelEvent) => {
+      const scrollContainer = scrollContainerRef.current;
+
+      if (!scrollContainer) return;
+
+      const target = e.target as HTMLElement;
+
+      // Permitir scroll si el wheel está dentro del scroll container
+      if (scrollContainer.contains(target)) {
+        return;
+      }
+
+      // Bloquear wheel si está fuera del scroll container
+      e.preventDefault();
+    };
+
     document.addEventListener("touchmove", handleTouchMove, { passive: false });
+    document.addEventListener("wheel", handleWheel, { passive: false });
+
     return () => {
       document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("wheel", handleWheel);
     };
   }, [isOpen]);
 
