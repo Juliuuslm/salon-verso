@@ -43,6 +43,7 @@ export default function Modal({
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isAnimatingRef = useRef(false);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const lastTouchYRef = useRef<number | null>(null);
   const { pauseScroll, resumeScroll } = useScrollContext();
 
   // Guardar scrollY en un ref para usar en cleanup
@@ -124,24 +125,55 @@ export default function Modal({
         e.stopPropagation();
       };
 
-      // Handler para touch events
+      // Handler para touch events - con boundary detection como en wheel
       const handleTouchMove = (e: TouchEvent) => {
         const target = e.target as HTMLElement;
+        const scrollContainer = scrollContainerRef.current;
 
-        // Si está fuera del scrollContainer, bloquear
-        if (!scrollContainerRef.current?.contains(target)) {
+        // Si el evento NO está dentro del scrollContainer, bloquearlo completamente
+        if (!scrollContainer?.contains(target)) {
           e.preventDefault();
           e.stopPropagation();
+          return;
         }
+
+        // Bloquear durante animaciones
+        if (isAnimatingRef.current) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+
+        // Detectar dirección del scroll (Y position)
+        // Usamos touches para detectar movimiento vertical
+        if (e.touches.length > 0) {
+          const touch = e.touches[0];
+          const lastTouchY = lastTouchYRef.current ?? touch.clientY;
+          const deltaY = lastTouchY - touch.clientY;
+          lastTouchYRef.current = touch.clientY;
+
+          // Si estamos en los límites, bloquear para evitar propagación
+          if (isAtScrollBoundary(scrollContainer, deltaY)) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        }
+      };
+
+      // Limpiar lastTouchY en touchend
+      const handleTouchEnd = () => {
+        lastTouchYRef.current = null;
       };
 
       // Usar capture phase para interceptar eventos más temprano
       document.addEventListener("wheel", handleWheel, { passive: false, capture: true });
       document.addEventListener("touchmove", handleTouchMove, { passive: false, capture: true });
+      document.addEventListener("touchend", handleTouchEnd, { capture: true });
 
       return () => {
         document.removeEventListener("wheel", handleWheel, true);
         document.removeEventListener("touchmove", handleTouchMove, true);
+        document.removeEventListener("touchend", handleTouchEnd, true);
 
         // Restaurar estilos del HTML
         document.documentElement.style.transform = "";
@@ -262,7 +294,8 @@ export default function Modal({
         role="dialog"
         aria-modal="true"
         aria-label={ariaLabel}
-        className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-sm max-h-[90vh] overflow-hidden flex flex-col ${sizeClasses[size]} ${className || ""}`}
+        className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-sm overflow-hidden flex flex-col ${sizeClasses[size]} ${className || ""}`}
+        style={{ maxHeight: "90dvh", willChange: "transform, opacity" }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -280,7 +313,11 @@ export default function Modal({
         <div
           ref={scrollContainerRef}
           className="w-full flex-1 overflow-y-auto overscroll-contain"
-          style={{ overscrollBehavior: "contain" }}
+          style={{
+            overscrollBehavior: "contain",
+            WebkitOverflowScrolling: "touch",
+            touchAction: "pan-y"
+          }}
         >
           {children}
         </div>
