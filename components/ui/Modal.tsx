@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { X } from "lucide-react";
 import { createPortal } from "react-dom";
 import gsap from "gsap";
+import { useScrollContext } from "@/components/providers/ScrollProvider";
 import { animateModalIn, animateModalOut } from "@/lib/animations/modalAnimations";
 
 interface ModalProps {
@@ -42,15 +43,31 @@ export default function Modal({
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isAnimatingRef = useRef(false);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const { pauseScroll, resumeScroll } = useScrollContext();
 
-  // Scroll lock with boundary detection
-  useEffect(() => {
+  // Guardar scrollY en un ref para usar en cleanup
+  const scrollYRef = useRef<number>(0);
+
+  // Scroll lock with boundary detection - usar useLayoutEffect para ejecutar ANTES del render
+  useLayoutEffect(() => {
     if (isOpen) {
+      // Pausar Lenis PRIMERO
+      pauseScroll();
+
+      // Remover transformaciones de Lenis inmediatamente
+      document.documentElement.style.transform = "none";
+      document.documentElement.style.width = "100%";
+      document.documentElement.style.height = "100%";
+      document.documentElement.style.overflow = "hidden";
+
+      // Guardar posición del scroll
+      scrollYRef.current = window.scrollY;
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
-      // Bloquear scroll en tanto html como body
-      document.documentElement.style.overflow = "hidden";
-      document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
+      // Fijar el body en la posición actual ANTES de que React pinte
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollYRef.current}px`;
+      document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
 
@@ -125,18 +142,28 @@ export default function Modal({
       return () => {
         document.removeEventListener("wheel", handleWheel, true);
         document.removeEventListener("touchmove", handleTouchMove, true);
+
+        // Restaurar estilos del HTML
+        document.documentElement.style.transform = "";
+        document.documentElement.style.width = "";
+        document.documentElement.style.height = "";
         document.documentElement.style.overflow = "";
-        document.documentElement.style.paddingRight = "";
+
+        // Restaurar posición del body
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
         document.body.style.overflow = "";
         document.body.style.paddingRight = "";
+
+        // Restaurar scroll
+        window.scrollTo(0, scrollYRef.current);
+
+        // Reanudar Lenis
+        resumeScroll();
       };
-    } else {
-      document.documentElement.style.overflow = "";
-      document.documentElement.style.paddingRight = "";
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
     }
-  }, [isOpen]);
+  }, [isOpen, pauseScroll, resumeScroll]);
 
   // Animaciones con GSAP
   useEffect(() => {

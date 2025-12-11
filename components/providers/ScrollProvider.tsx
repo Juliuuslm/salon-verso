@@ -1,7 +1,23 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { createContext, useContext, useEffect, useRef } from "react";
 import Lenis from "lenis";
+
+interface ScrollContextType {
+  lenis: Lenis | null;
+  pauseScroll: () => void;
+  resumeScroll: () => void;
+}
+
+const ScrollContext = createContext<ScrollContextType | undefined>(undefined);
+
+export function useScrollContext() {
+  const context = useContext(ScrollContext);
+  if (!context) {
+    throw new Error("useScrollContext must be used within ScrollProvider");
+  }
+  return context;
+}
 
 export default function ScrollProvider({
   children,
@@ -31,5 +47,21 @@ export default function ScrollProvider({
     };
   }, []);
 
-  return <>{children}</>;
+  const pauseScroll = () => {
+    if (lenisRef.current) {
+      lenisRef.current.stop();
+    }
+  };
+
+  const resumeScroll = () => {
+    if (lenisRef.current) {
+      lenisRef.current.start();
+    }
+  };
+
+  return (
+    <ScrollContext.Provider value={{ lenis: lenisRef.current, pauseScroll, resumeScroll }}>
+      {children}
+    </ScrollContext.Provider>
+  );
 }
