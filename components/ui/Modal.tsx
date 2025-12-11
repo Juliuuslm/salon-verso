@@ -149,7 +149,7 @@ export default function Modal({
         role="dialog"
         aria-modal="true"
         aria-label={ariaLabel}
-        className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-sm max-h-[90vh] ${sizeClasses[size]} ${className || ""}`}
+        className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-sm max-h-[90vh] overflow-hidden flex flex-col ${sizeClasses[size]} ${className || ""}`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -164,7 +164,7 @@ export default function Modal({
         )}
 
         {/* Content */}
-        <div className="w-full h-full">{children}</div>
+        <div className="w-full flex-1 overflow-y-auto">{children}</div>
       </div>
     </div>
   );
