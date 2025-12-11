@@ -12,7 +12,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-black py-16 md:py-20 border-t border-white/10 text-center">
+    <footer className="bg-black py-20 md:py-32 border-t border-white/10 text-center">
       <h2 className="text-4xl md:text-6xl font-serif text-white/10 mb-8 tracking-widest select-none">
         VERSO
       </h2>

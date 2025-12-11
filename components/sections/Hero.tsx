@@ -32,7 +32,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden py-32 md:py-0"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden py-20 md:py-32"
     >
       {/* Background with Parallax */}
       <div className="absolute inset-0 z-0">

@@ -64,7 +64,7 @@ export default function Gallery() {
   return (
     <section
       id="gallery"
-      className="relative bg-[#0a0a0a] pb-20 md:pb-32 pt-12 overflow-hidden"
+      className="relative bg-[#0a0a0a] py-20 md:py-32 overflow-hidden"
     >
       {/* Header */}
       <div className="container mx-auto px-6 mb-8 md:mb-12 z-20 relative">
