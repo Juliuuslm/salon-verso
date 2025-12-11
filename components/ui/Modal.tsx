@@ -208,6 +208,7 @@ export default function Modal({
         role="dialog"
         aria-modal="true"
         aria-label={ariaLabel}
+        data-lenis-prevent="true"
         className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-sm overflow-hidden flex flex-col min-h-0 pointer-events-auto ${sizeClasses[size]} ${className || ""}`}
         style={{ maxHeight: "90dvh", willChange: "transform, opacity" }}
         onClick={(e) => e.stopPropagation()}
