@@ -73,29 +73,26 @@ export default function Modal({
       return () => {
         // CLEANUP SEQUENCE - CRÍTICO PARA DESKTOP
 
-        // PASO 1: Restaurar body PRIMERO (libera el layout)
-        document.body.style.position = "";
-        document.body.style.top = "";
-        document.body.style.width = "";
-        document.body.style.overflow = "";
-        document.body.style.paddingRight = "";
+        // PASO 1: Restaurar body PRIMERO usando removeProperty
+        // removeProperty() remueve completamente las propiedades inline, no solo las establece a ""
+        document.body.style.removeProperty("position");
+        document.body.style.removeProperty("top");
+        document.body.style.removeProperty("width");
+        document.body.style.removeProperty("overflow");
+        document.body.style.removeProperty("padding-right");
 
-        // PASO 2: Restaurar HTML
-        document.documentElement.style.transform = "";
-        document.documentElement.style.width = "";
-        document.documentElement.style.height = "";
-        document.documentElement.style.overflow = "";
+        // PASO 2: Restaurar HTML usando removeProperty
+        document.documentElement.style.removeProperty("transform");
+        document.documentElement.style.removeProperty("width");
+        document.documentElement.style.removeProperty("height");
+        document.documentElement.style.removeProperty("overflow");
 
         // PASO 3: Restaurar scroll inmediatamente
         window.scrollTo(0, scrollYRef.current);
 
-        // PASO 4: Esperar dos frames para que el navegador estabilice completamente
-        // antes de reactivar Lenis (es crítico para sincronización correcta)
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            resumeScroll();
-          });
-        });
+        // PASO 4: Reactivar Lenis inmediatamente
+        // Ya no necesita delay porque removeProperty() elimina completamente los estilos residuales
+        resumeScroll();
       };
     }
   }, [isOpen, pauseScroll, resumeScroll]);
