@@ -43,7 +43,6 @@ export default function Modal({
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isAnimatingRef = useRef(false);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
-  const lastTouchYRef = useRef<number | null>(null);
   const { pauseScroll, resumeScroll } = useScrollContext();
 
   // Guardar scrollY en un ref para usar en cleanup
@@ -125,7 +124,8 @@ export default function Modal({
         e.stopPropagation();
       };
 
-      // Handler para touch events - con boundary detection como en wheel
+      // Handler para touch events - SIMPLE: solo bloquear fuera del scrollContainer
+      // El scroll nativo del navigador debe funcionar sin preventDefault dentro del container
       const handleTouchMove = (e: TouchEvent) => {
         const target = e.target as HTMLElement;
         const scrollContainer = scrollContainerRef.current;
@@ -144,36 +144,17 @@ export default function Modal({
           return;
         }
 
-        // Detectar dirección del scroll (Y position)
-        // Usamos touches para detectar movimiento vertical
-        if (e.touches.length > 0) {
-          const touch = e.touches[0];
-          const lastTouchY = lastTouchYRef.current ?? touch.clientY;
-          const deltaY = lastTouchY - touch.clientY;
-          lastTouchYRef.current = touch.clientY;
-
-          // Si estamos en los límites, bloquear para evitar propagación
-          if (isAtScrollBoundary(scrollContainer, deltaY)) {
-            e.preventDefault();
-            e.stopPropagation();
-          }
-        }
-      };
-
-      // Limpiar lastTouchY en touchend
-      const handleTouchEnd = () => {
-        lastTouchYRef.current = null;
+        // IMPORTANTE: NO hacer preventDefault dentro del scrollContainer
+        // Necesitamos permitir que el scroll nativo funcione
       };
 
       // Usar capture phase para interceptar eventos más temprano
       document.addEventListener("wheel", handleWheel, { passive: false, capture: true });
       document.addEventListener("touchmove", handleTouchMove, { passive: false, capture: true });
-      document.addEventListener("touchend", handleTouchEnd, { capture: true });
 
       return () => {
         document.removeEventListener("wheel", handleWheel, true);
         document.removeEventListener("touchmove", handleTouchMove, true);
-        document.removeEventListener("touchend", handleTouchEnd, true);
 
         // Restaurar estilos del HTML
         document.documentElement.style.transform = "";
