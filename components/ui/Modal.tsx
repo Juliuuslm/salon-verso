@@ -50,6 +50,10 @@ export default function Modal({
   // Bloquear scroll del body cuando el modal está abierto
   useLayoutEffect(() => {
     if (isOpen) {
+      // Guardar posición del scroll ANTES de cualquier manipulación
+      scrollYRef.current = window.scrollY;
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
       // Pausar Lenis (smooth scroll library)
       pauseScroll();
 
@@ -59,10 +63,6 @@ export default function Modal({
       document.documentElement.style.height = "100%";
       document.documentElement.style.overflow = "hidden";
 
-      // Guardar posición del scroll
-      scrollYRef.current = window.scrollY;
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-
       // Fijar el body para bloquear scroll de la página principal
       document.body.style.position = "fixed";
       document.body.style.top = `-${scrollYRef.current}px`;
@@ -71,42 +71,51 @@ export default function Modal({
       document.body.style.paddingRight = `${scrollbarWidth}px`;
 
       return () => {
-        // Restaurar estilos del HTML
-        document.documentElement.style.transform = "";
-        document.documentElement.style.width = "";
-        document.documentElement.style.height = "";
-        document.documentElement.style.overflow = "";
+        // CLEANUP SEQUENCE - CRÍTICO PARA DESKTOP
 
-        // Restaurar posición del body
+        // PASO 1: Restaurar body PRIMERO (libera el layout)
         document.body.style.position = "";
         document.body.style.top = "";
         document.body.style.width = "";
         document.body.style.overflow = "";
         document.body.style.paddingRight = "";
 
-        // Restaurar scroll a la posición anterior
+        // PASO 2: Restaurar HTML
+        document.documentElement.style.transform = "";
+        document.documentElement.style.width = "";
+        document.documentElement.style.height = "";
+        document.documentElement.style.overflow = "";
+
+        // PASO 3: Restaurar scroll inmediatamente
         window.scrollTo(0, scrollYRef.current);
 
-        // Reanudar Lenis
-        resumeScroll();
+        // PASO 4: Esperar un frame antes de reactivar Lenis
+        requestAnimationFrame(() => {
+          resumeScroll();
+        });
       };
     }
   }, [isOpen, pauseScroll, resumeScroll]);
 
-  // Bloquear touchmove fuera del scroll container - permite scroll táctil dentro
+  // Bloquear touchmove en overlay y áreas fuera del scroll container
   useEffect(() => {
     if (!isOpen) return;
 
     const handleTouchMove = (e: TouchEvent) => {
       const scrollContainer = scrollContainerRef.current;
-      if (!scrollContainer) return;
+      const modalContainer = modalRef.current;
 
-      // Usar composedPath() para verificar correctamente si está dentro del scroll container
-      const path = e.composedPath();
-      const isInsideScrollContainer = path.includes(scrollContainer);
+      if (!scrollContainer || !modalContainer) return;
 
-      // Solo bloquear si NO está dentro del scroll container
-      if (!isInsideScrollContainer) {
+      const target = e.target as HTMLElement;
+
+      // Permitir scroll si el touch está en el scroll container o sus hijos
+      if (scrollContainer.contains(target)) {
+        return;
+      }
+
+      // Bloquear si está en el overlay o fuera del modal
+      if (!modalContainer.contains(target)) {
         e.preventDefault();
       }
     };
@@ -193,8 +202,8 @@ export default function Modal({
   }
 
   const content = (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center pointer-events-none">
-      {/* Overlay - pointer-events-none para no capturar eventos, pero clickeable vía descendientes */}
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center">
+      {/* Overlay - clickeable para cerrar */}
       <div
         ref={overlayRef}
         className="absolute inset-0 bg-black/80 backdrop-blur-xl cursor-pointer pointer-events-auto"
@@ -209,7 +218,7 @@ export default function Modal({
         aria-modal="true"
         aria-label={ariaLabel}
         className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-sm overflow-hidden flex flex-col min-h-0 pointer-events-auto ${sizeClasses[size]} ${className || ""}`}
-        style={{ maxHeight: "90dvh", willChange: "transform, opacity", touchAction: "none" }}
+        style={{ maxHeight: "90dvh", willChange: "transform, opacity" }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -223,14 +232,15 @@ export default function Modal({
           </button>
         )}
 
-        {/* Content - Scroll nativo con flexbox optimizado y pointer-events-auto */}
+        {/* Content - Scroll nativo con flexbox optimizado */}
         <div
           ref={scrollContainerRef}
-          className="w-full flex-1 overflow-y-auto min-h-0 max-h-[90dvh] pointer-events-auto"
+          className="w-full flex-1 overflow-y-auto min-h-0 max-h-[90dvh]"
           style={{
             WebkitOverflowScrolling: "touch",
-            touchAction: "auto",
+            touchAction: "pan-y",
             WebkitTouchCallout: "none",
+            overscrollBehavior: "contain",
           }}
         >
           {children}
