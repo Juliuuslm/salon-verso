@@ -12,7 +12,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-black py-16 md:py-20 border-t border-white/10 text-center">
+    <footer className="bg-black py-20 md:py-32 border-t border-white/10 text-center">
       <h2 className="text-4xl md:text-6xl font-serif text-white/10 mb-8 tracking-widest select-none">
         VERSO
       </h2>
@@ -30,10 +30,15 @@ export default function Footer() {
         ))}
       </div>
       <p className="text-neutral-700 text-[10px] uppercase tracking-widest">
-        © {currentYear} Verso Venue. Todos los derechos reservados.
-      </p>
-      <p className="text-neutral-800 text-[8px] uppercase tracking-widest mt-4">
-        Powered by Novalabss
+        Copyright © {currentYear} Verso Venue. Built with love and AI by{" "}
+        <a
+          href="https://aurora33.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-amber-400 hover:text-amber-300 transition-colors cursor-pointer normal-case"
+        >
+          aurora33
+        </a>
       </p>
     </footer>
   );

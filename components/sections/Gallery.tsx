@@ -64,13 +64,13 @@ export default function Gallery() {
   return (
     <section
       id="gallery"
-      className="relative bg-[#0a0a0a] pb-20 md:pb-32 pt-12 overflow-hidden"
+      className="relative bg-[#0a0a0a] py-20 md:py-32 overflow-hidden"
     >
       {/* Header */}
-      <div className="container mx-auto px-6 mb-8 md:mb-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-6 z-20 relative">
+      <div className="container mx-auto px-6 mb-8 md:mb-12 z-20 relative">
         <Reveal>
           <div>
-            <h2 className="text-6xl md:text-9xl font-serif text-white/5 absolute -top-8 md:-top-12 left-0 select-none pointer-events-none">
+            <h2 className="text-6xl md:text-9xl font-serif text-white absolute -top-8 md:-top-12 left-0 select-none pointer-events-none" style={{ opacity: 0.02 }}>
               GALLERY
             </h2>
             <span className="text-amber-500 text-[10px] md:text-xs tracking-[0.3em] uppercase block mb-2 md:mb-4">
@@ -81,9 +81,11 @@ export default function Gallery() {
             </h3>
           </div>
         </Reveal>
+      </div>
 
-        {/* Controls */}
-        <div className="flex items-center gap-4 w-full md:w-auto">
+      {/* Thumbnail Navigation */}
+      <div className="container mx-auto px-6 mb-6 md:mb-8">
+        <div className="flex gap-2 md:gap-4 items-center">
           {/* Play/Pause Button */}
           <button
             onClick={() => setIsAutoPlay(!isAutoPlay)}
@@ -113,39 +115,41 @@ export default function Gallery() {
           </div>
 
           {/* Slide Counter */}
-          <div className="ml-auto md:ml-0 text-white/40 text-xs md:text-sm font-mono flex-shrink-0">
+          <div className="text-white/40 text-xs md:text-sm font-mono flex-shrink-0">
             {currentSlide + 1} / {GALLERY_IMAGES.length}
           </div>
-        </div>
-      </div>
 
-      {/* Thumbnail Navigation */}
-      <div className="container mx-auto px-6 mb-6 md:mb-8">
-        <div className="flex gap-2 md:gap-4 overflow-x-auto pb-2">
-          {GALLERY_IMAGES.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                goToSlide(index);
-                setIsAutoPlay(false);
-              }}
-              className={`flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg border-2 transition-all duration-300 overflow-hidden ${
-                index === currentSlide
-                  ? "border-amber-400 ring-2 ring-amber-400/30"
-                  : "border-white/10 hover:border-white/30"
-              }`}
-              aria-label={`Ir a slide ${index + 1}`}
-              aria-current={index === currentSlide ? "true" : undefined}
-            >
-              <Image
-                src={GALLERY_IMAGES[index].url}
-                alt={GALLERY_IMAGES[index].title}
-                width={80}
-                height={80}
-                className="w-full h-full object-cover"
-              />
-            </button>
-          ))}
+          {/* Thumbnails Container */}
+          <div className="flex gap-2 md:gap-4 overflow-x-auto items-center px-6 py-4 flex-1">
+            {GALLERY_IMAGES.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  goToSlide(index);
+                  setIsAutoPlay(false);
+                }}
+                className={`flex-shrink-0 w-24 h-24 md:w-32 md:h-32 rounded-lg border-2 transition-all duration-500 overflow-hidden ${
+                  index === currentSlide
+                    ? "border-amber-400 ring-2 ring-amber-400/50 scale-105"
+                    : "border-white/10 hover:border-white/30 hover:scale-100"
+                }`}
+                aria-label={`Ir a slide ${index + 1}`}
+                aria-current={index === currentSlide ? "true" : undefined}
+              >
+                <Image
+                  src={GALLERY_IMAGES[index].url}
+                  alt={GALLERY_IMAGES[index].title}
+                  width={128}
+                  height={128}
+                  className={`w-full h-full object-cover transition-all duration-500 ${
+                    index === currentSlide
+                      ? "grayscale-0 brightness-110"
+                      : "grayscale hover:grayscale-75"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -158,7 +162,11 @@ export default function Gallery() {
               index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
-            <div className="absolute inset-0 bg-black/40 z-10"></div>
+            <div
+              className={`absolute inset-0 bg-black/40 z-10 transition-transform duration-[10000ms] ease-linear ${
+                index === currentSlide ? "scale-110" : "scale-100"
+              }`}
+            ></div>
             <Image
               src={slide.url}
               alt={slide.title}

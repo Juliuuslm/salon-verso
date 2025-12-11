@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useActiveSectionDetection } from "@/lib/hooks/useActiveSectionDetection";
+import MobileMenu from "@/components/ui/MobileMenu";
 import type { NavLink } from "@/types";
 
 const NAV_LINKS: NavLink[] = [
@@ -42,7 +43,6 @@ export default function Navbar() {
     if (element) {
       const y = element.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top: y, behavior: "smooth" });
-      setMobileMenuOpen(false);
     }
   };
 
@@ -96,34 +96,18 @@ export default function Navbar() {
           className="md:hidden text-amber-100 cursor-pointer z-50 p-2"
           aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
         >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          <Menu size={24} />
         </button>
       </div>
 
-      {/* Mobile Menu Fullscreen */}
-      <div
-        className={`fixed inset-0 bg-[#0a0a0a] z-40 flex flex-col justify-center items-center space-y-8 transition-all duration-500 ${
-          mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
-      >
-        {NAV_LINKS.map((link) => {
-          const isActive = activeSection === link.id;
-          return (
-            <button
-              key={link.id}
-              onClick={() => scrollToSection(link.id)}
-              className={`text-2xl font-serif transition-colors ${
-                isActive
-                  ? "text-amber-400 font-bold"
-                  : "text-white hover:text-amber-400"
-              }`}
-              aria-current={isActive ? "page" : undefined}
-            >
-              {link.name}
-            </button>
-          );
-        })}
-      </div>
+      {/* Mobile Menu - Rendered as Portal */}
+      <MobileMenu
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        links={NAV_LINKS}
+        activeSection={activeSection}
+        onNavigate={scrollToSection}
+      />
     </nav>
   );
 }

@@ -73,9 +73,8 @@ export default function ModalService({
       onClose={onClose}
       size="lg"
       ariaLabel={`Detalles de ${service.title}`}
-      className="max-h-[95vh] overflow-hidden flex flex-col"
     >
-      <div ref={contentRef} className="w-full h-full overflow-y-auto">
+      <div ref={contentRef}>
         {/* Hero Image with Parallax */}
         <div ref={heroImageRef} className="relative w-full h-64 overflow-hidden bg-black">
           <Image

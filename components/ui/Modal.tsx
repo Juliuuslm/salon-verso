@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { X } from "lucide-react";
 import { createPortal } from "react-dom";
 import gsap from "gsap";
+import { useScrollContext } from "@/components/providers/ScrollProvider";
 import { animateModalIn, animateModalOut } from "@/lib/animations/modalAnimations";
 
 interface ModalProps {
@@ -39,34 +40,146 @@ export default function Modal({
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const isAnimatingRef = useRef(false);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const { pauseScroll, resumeScroll } = useScrollContext();
 
-  // Scroll lock
-  useEffect(() => {
+  // Guardar scrollY en un ref para usar en cleanup
+  const scrollYRef = useRef<number>(0);
+
+  // Scroll lock with boundary detection - usar useLayoutEffect para ejecutar ANTES del render
+  useLayoutEffect(() => {
     if (isOpen) {
+      // Pausar Lenis PRIMERO
+      pauseScroll();
+
+      // Remover transformaciones de Lenis inmediatamente
+      document.documentElement.style.transform = "none";
+      document.documentElement.style.width = "100%";
+      document.documentElement.style.height = "100%";
+      document.documentElement.style.overflow = "hidden";
+
+      // Guardar posición del scroll
+      scrollYRef.current = window.scrollY;
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+      // Fijar el body en la posición actual ANTES de que React pinte
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollYRef.current}px`;
+      document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
-    } else {
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-    }
 
-    return () => {
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-    };
-  }, [isOpen]);
+      // Detecta si el scroll está en los límites del contenedor
+      const isAtScrollBoundary = (
+        container: HTMLElement,
+        deltaY: number
+      ): boolean => {
+        const { scrollTop, scrollHeight, clientHeight } = container;
+        const THRESHOLD = 1;
+
+        // Scrolling UP mientras estamos en el TOP
+        if (deltaY < 0 && scrollTop <= THRESHOLD) {
+          return true;
+        }
+
+        // Scrolling DOWN mientras estamos en el BOTTOM
+        if (deltaY > 0 && scrollTop + clientHeight >= scrollHeight - THRESHOLD) {
+          return true;
+        }
+
+        return false;
+      };
+
+      // Handler para bloquear scroll en todo el documento
+      const handleWheel = (e: WheelEvent) => {
+        const target = e.target as HTMLElement;
+        const scrollContainer = scrollContainerRef.current;
+
+        // Si el evento NO está dentro del scrollContainer, bloquearlo completamente
+        if (!scrollContainer?.contains(target)) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+
+        // Bloquear durante animaciones
+        if (isAnimatingRef.current) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+
+        // Si estamos en los límites, bloquear
+        if (isAtScrollBoundary(scrollContainer, e.deltaY)) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+
+        // En otro caso, hacer scroll manual (sin preventDefault aquí)
+        scrollContainer.scrollTop += e.deltaY;
+        e.preventDefault();
+        e.stopPropagation();
+      };
+
+      // Handler para touch events
+      const handleTouchMove = (e: TouchEvent) => {
+        const target = e.target as HTMLElement;
+
+        // Si está fuera del scrollContainer, bloquear
+        if (!scrollContainerRef.current?.contains(target)) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      };
+
+      // Usar capture phase para interceptar eventos más temprano
+      document.addEventListener("wheel", handleWheel, { passive: false, capture: true });
+      document.addEventListener("touchmove", handleTouchMove, { passive: false, capture: true });
+
+      return () => {
+        document.removeEventListener("wheel", handleWheel, true);
+        document.removeEventListener("touchmove", handleTouchMove, true);
+
+        // Restaurar estilos del HTML
+        document.documentElement.style.transform = "";
+        document.documentElement.style.width = "";
+        document.documentElement.style.height = "";
+        document.documentElement.style.overflow = "";
+
+        // Restaurar posición del body
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
+        document.body.style.overflow = "";
+        document.body.style.paddingRight = "";
+
+        // Restaurar scroll
+        window.scrollTo(0, scrollYRef.current);
+
+        // Reanudar Lenis
+        resumeScroll();
+      };
+    }
+  }, [isOpen, pauseScroll, resumeScroll]);
 
   // Animaciones con GSAP
   useEffect(() => {
     if (!modalRef.current || !overlayRef.current) return;
 
     if (isOpen) {
+      isAnimatingRef.current = true;
       timelineRef.current = animateModalIn(
         modalRef.current,
         overlayRef.current
       );
+
+      // Desbloquear scroll cuando termine la animación de entrada
+      timelineRef.current.eventCallback("onComplete", () => {
+        isAnimatingRef.current = false;
+      });
     } else {
       timelineRef.current = animateModalOut(
         modalRef.current,
@@ -149,7 +262,7 @@ export default function Modal({
         role="dialog"
         aria-modal="true"
         aria-label={ariaLabel}
-        className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-sm overflow-hidden max-h-[90vh] overflow-y-auto ${sizeClasses[size]} ${className || ""}`}
+        className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-sm max-h-[90vh] overflow-hidden flex flex-col ${sizeClasses[size]} ${className || ""}`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -164,7 +277,13 @@ export default function Modal({
         )}
 
         {/* Content */}
-        <div className="w-full h-full">{children}</div>
+        <div
+          ref={scrollContainerRef}
+          className="w-full flex-1 overflow-y-auto overscroll-contain"
+          style={{ overscrollBehavior: "contain" }}
+        >
+          {children}
+        </div>
       </div>
     </div>
   );
