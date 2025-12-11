@@ -149,7 +149,7 @@ export default function Modal({
         role="dialog"
         aria-modal="true"
         aria-label={ariaLabel}
-        className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-sm overflow-hidden max-h-[90vh] overflow-y-auto ${sizeClasses[size]} ${className || ""}`}
+        className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-sm max-h-[90vh] ${sizeClasses[size]} ${className || ""}`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
