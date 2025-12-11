@@ -40,6 +40,7 @@ export default function Modal({
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const { pauseScroll, resumeScroll } = useScrollContext();
 
@@ -91,6 +92,26 @@ export default function Modal({
       };
     }
   }, [isOpen, pauseScroll, resumeScroll]);
+
+  // Bloquear touchmove fuera del scroll container - permite scroll táctil dentro
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const target = e.target as HTMLElement;
+      const scrollContainer = scrollContainerRef.current;
+
+      // Solo bloquear si NO está dentro del scroll container
+      if (!scrollContainer?.contains(target)) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener("touchmove", handleTouchMove, { passive: false });
+    return () => {
+      document.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, [isOpen]);
 
   // Animaciones con GSAP
   useEffect(() => {
@@ -168,22 +189,22 @@ export default function Modal({
   }
 
   const content = (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center">
-      {/* Overlay */}
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center pointer-events-none">
+      {/* Overlay - pointer-events-none para no capturar eventos, pero clickeable vía descendientes */}
       <div
         ref={overlayRef}
-        className="absolute inset-0 bg-black/80 backdrop-blur-xl cursor-pointer"
+        className="absolute inset-0 bg-black/80 backdrop-blur-xl cursor-pointer pointer-events-auto"
         onClick={() => closeOnOverlayClick && onClose()}
         aria-hidden="true"
       />
 
-      {/* Modal */}
+      {/* Modal - pointer-events-auto para recibir eventos */}
       <div
         ref={modalRef}
         role="dialog"
         aria-modal="true"
         aria-label={ariaLabel}
-        className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-sm overflow-hidden flex flex-col min-h-0 ${sizeClasses[size]} ${className || ""}`}
+        className={`relative z-10 bg-[#0a0a0a] border border-white/10 rounded-sm overflow-hidden flex flex-col min-h-0 pointer-events-auto ${sizeClasses[size]} ${className || ""}`}
         style={{ maxHeight: "90dvh", willChange: "transform, opacity" }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -198,8 +219,11 @@ export default function Modal({
           </button>
         )}
 
-        {/* Content - Scroll nativo con flexbox optimizado */}
-        <div className="w-full flex-1 overflow-y-auto min-h-0 max-h-[90dvh]">
+        {/* Content - Scroll nativo con flexbox optimizado y pointer-events-auto */}
+        <div
+          ref={scrollContainerRef}
+          className="w-full flex-1 overflow-y-auto min-h-0 max-h-[90dvh] pointer-events-auto"
+        >
           {children}
         </div>
       </div>
