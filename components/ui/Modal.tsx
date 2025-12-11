@@ -90,9 +90,10 @@ export default function Modal({
         // PASO 3: Restaurar scroll inmediatamente
         window.scrollTo(0, scrollYRef.current);
 
-        // PASO 4: Reactivar Lenis inmediatamente
-        // Ya no necesita delay porque removeProperty() elimina completamente los estilos residuales
-        resumeScroll();
+        // PASO 4: Esperar un frame antes de reactivar Lenis para estabilizar
+        requestAnimationFrame(() => {
+          resumeScroll();
+        });
       };
     }
   }, [isOpen, pauseScroll, resumeScroll]);
