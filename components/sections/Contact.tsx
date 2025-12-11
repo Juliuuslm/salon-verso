@@ -84,16 +84,18 @@ export default function Contact() {
                   <MapPin size={16} /> <span>Lomas de Chapultepec, CDMX</span>
                 </div>
                 <a
-                  href="tel:+525588990000"
+                  href="https://wa.me/525574533388"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-4 hover:text-amber-400 transition-colors cursor-pointer w-max"
                 >
-                  <Phone size={16} /> <span>+52 (55) 8899 0000</span>
+                  <Phone size={16} /> <span>+52 55 7453 3388</span>
                 </a>
                 <a
-                  href="mailto:concierge@verso.com"
+                  href="mailto:contacto@aurora33.org"
                   className="flex items-center gap-4 hover:text-amber-400 transition-colors cursor-pointer w-max"
                 >
-                  <Mail size={16} /> <span>concierge@verso.com</span>
+                  <Mail size={16} /> <span>contacto@aurora33.org</span>
                 </a>
               </div>
             </Reveal>
@@ -178,7 +180,7 @@ export default function Contact() {
                             ? "border-red-500/70 focus:border-red-500"
                             : "border-white/20 focus:border-amber-500"
                         }`}
-                        placeholder="+52 (55) 8899 0000"
+                        placeholder="+52 55 7453 3388"
                         aria-invalid={!!(errors.phone && touched.phone)}
                         aria-describedby={
                           errors.phone && touched.phone ? "phone-error" : undefined
@@ -301,7 +303,7 @@ export default function Contact() {
                     <div>
                       <p className="font-semibold text-sm">Algo no salió como esperábamos</p>
                       <p className="text-xs text-red-200 mt-1">
-                        Por favor intenta de nuevo, o llámanos al +52 (55) 8899 0000. Estamos aquí para ayudarte.
+                        Por favor intenta de nuevo, o contáctanos al +52 55 7453 3388 (WhatsApp). Estamos aquí para ayudarte.
                       </p>
                     </div>
                   </div>
