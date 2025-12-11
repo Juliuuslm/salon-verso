@@ -47,6 +47,10 @@ export default function Modal({
   useEffect(() => {
     if (isOpen) {
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+      // Bloquear scroll en tanto html como body
+      document.documentElement.style.overflow = "hidden";
+      document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = `${scrollbarWidth}px`;
 
@@ -71,78 +75,64 @@ export default function Modal({
         return false;
       };
 
-      // Handler para wheel events
+      // Handler para bloquear scroll en todo el documento
       const handleWheel = (e: WheelEvent) => {
-        // Bloquear scroll durante animaciones
+        const target = e.target as HTMLElement;
+        const scrollContainer = scrollContainerRef.current;
+
+        // Si el evento NO está dentro del scrollContainer, bloquearlo completamente
+        if (!scrollContainer?.contains(target)) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+
+        // Bloquear durante animaciones
         if (isAnimatingRef.current) {
           e.preventDefault();
+          e.stopPropagation();
           return;
         }
 
-        const target = e.target as Node;
-
-        // Si el evento NO está dentro del modal, bloquearlo completamente
-        if (!modalRef.current?.contains(target)) {
+        // Si estamos en los límites, bloquear
+        if (isAtScrollBoundary(scrollContainer, e.deltaY)) {
           e.preventDefault();
+          e.stopPropagation();
           return;
         }
 
-        // Obtener el scrollable container
-        const scrollContainer = scrollContainerRef.current;
-        if (!scrollContainer) {
-          e.preventDefault();
-          return;
-        }
-
-        // Si el target está dentro del scrollable container
-        if (scrollContainer.contains(target)) {
-          // Verificar si estamos en los límites del scroll
-          if (isAtScrollBoundary(scrollContainer, e.deltaY)) {
-            e.preventDefault();
-            e.stopPropagation();
-            return;
-          }
-          // Permitir scroll normal dentro del contenedor
-          return;
-        }
-
-        // Para cualquier otro elemento dentro del modal, prevenir
+        // En otro caso, hacer scroll manual (sin preventDefault aquí)
+        scrollContainer.scrollTop += e.deltaY;
         e.preventDefault();
+        e.stopPropagation();
       };
 
-      // Handler para touch events (mobile/tablet)
+      // Handler para touch events
       const handleTouchMove = (e: TouchEvent) => {
-        const target = e.target as Node;
+        const target = e.target as HTMLElement;
 
-        // Si está fuera del modal, bloquear
-        if (!modalRef.current?.contains(target)) {
+        // Si está fuera del scrollContainer, bloquear
+        if (!scrollContainerRef.current?.contains(target)) {
           e.preventDefault();
-          return;
+          e.stopPropagation();
         }
-
-        const scrollContainer = scrollContainerRef.current;
-
-        // Si no hay scrollContainer o el target no está en él, bloquear
-        if (!scrollContainer || !scrollContainer.contains(target)) {
-          e.preventDefault();
-          return;
-        }
-
-        // Para touch, confiamos en overscroll-behavior: contain
-        // No bloqueamos aquí para permitir scroll natural
       };
 
-      // Registrar event listeners con { passive: false } para usar preventDefault
-      document.addEventListener("wheel", handleWheel, { passive: false });
-      document.addEventListener("touchmove", handleTouchMove, { passive: false });
+      // Usar capture phase para interceptar eventos más temprano
+      document.addEventListener("wheel", handleWheel, { passive: false, capture: true });
+      document.addEventListener("touchmove", handleTouchMove, { passive: false, capture: true });
 
       return () => {
-        document.removeEventListener("wheel", handleWheel);
-        document.removeEventListener("touchmove", handleTouchMove);
+        document.removeEventListener("wheel", handleWheel, true);
+        document.removeEventListener("touchmove", handleTouchMove, true);
+        document.documentElement.style.overflow = "";
+        document.documentElement.style.paddingRight = "";
         document.body.style.overflow = "";
         document.body.style.paddingRight = "";
       };
     } else {
+      document.documentElement.style.overflow = "";
+      document.documentElement.style.paddingRight = "";
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
     }
