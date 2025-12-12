@@ -128,7 +128,7 @@ export default function Gallery() {
                   goToSlide(index);
                   setIsAutoPlay(false);
                 }}
-                className={`flex-shrink-0 w-24 h-24 md:w-32 md:h-32 rounded-lg border-2 transition-all duration-500 overflow-hidden ${
+                className={`flex-shrink-0 w-24 h-24 md:w-32 md:h-32 rounded-none border-2 transition-all duration-500 overflow-hidden ${
                   index === currentSlide
                     ? "border-white/10 scale-105"
                     : "border-white/10 hover:border-white/30 hover:scale-100"
