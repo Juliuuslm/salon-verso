@@ -92,10 +92,10 @@ export default function Contact() {
                   <Phone size={16} /> <span>+52 55 7453 3388</span>
                 </a>
                 <a
-                  href="mailto:contacto@aurora33.org"
+                  href="mailto:hola@aurora33.org"
                   className="flex items-center gap-4 hover:text-amber-400 transition-colors cursor-pointer w-max"
                 >
-                  <Mail size={16} /> <span>contacto@aurora33.org</span>
+                  <Mail size={16} /> <span>hola@aurora33.org</span>
                 </a>
               </div>
             </Reveal>
