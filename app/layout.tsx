@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_MX",
-    url: "https://verso-venue.com",
+    url: "https://aurora33.org",
     siteName: "VERSO | Luxury Event Venue",
     title: "VERSO | Luxury Event Venue",
     description:

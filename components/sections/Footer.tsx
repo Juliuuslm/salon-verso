@@ -32,7 +32,7 @@ export default function Footer() {
       <p className="text-neutral-700 text-[10px] uppercase tracking-widest">
         Copyright © {currentYear} Verso Venue. Built with love and AI by{" "}
         <a
-          href="https://aurora33.com"
+          href="https://aurora33.org"
           target="_blank"
           rel="noopener noreferrer"
           className="text-amber-400 hover:text-amber-300 transition-colors cursor-pointer normal-case"
